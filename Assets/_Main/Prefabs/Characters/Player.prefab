@@ -532,6 +532,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4829931218018393209}
+  - component: {fileID: 4829931217395566911}
+  - component: {fileID: 4829931217395566912}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -555,6 +557,38 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4829931217395566911
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4829931218018393214}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f37f15b9b5655aa49b353ab3418d2afe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _floatingJoystick: {fileID: 0}
+  _rigidbody: {fileID: 4829931217395566912}
+  movementSpeed: 500
+  _animator: {fileID: 1327938963485325824}
+--- !u!54 &4829931217395566912
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4829931218018393214}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &4839058199907141992
 GameObject:
   m_ObjectHideFlags: 0
@@ -665,7 +699,7 @@ Animator:
   m_GameObject: {fileID: 5748340297998072512}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: 9bafb66b3b7771e41b2aa574fdbe5254, type: 3}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: bbe3991bc78087a4d85c906c674cdf95, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
   m_ApplyRootMotion: 1
