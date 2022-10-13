@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Collectible_Brick : MonoBehaviour
+public class Collectible_Brick : MonoBehaviour, IInteractible
 {
     [SerializeField] public BrickType _brickData;
     
@@ -17,5 +17,10 @@ public class Collectible_Brick : MonoBehaviour
     {
         _meshRenderer = GetComponentInChildren<MeshRenderer>();
         _meshRenderer.material = _brickData._material;
+    }
+
+    public void OnInteract()
+    {
+        
     }
 }

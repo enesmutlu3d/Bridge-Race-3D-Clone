@@ -9,8 +9,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3061713771866485036}
-  - component: {fileID: 6412211220093294557}
   - component: {fileID: 4192929917178587359}
+  - component: {fileID: 1089744222}
   m_Layer: 0
   m_Name: Brick
   m_TagString: Untagged
@@ -34,18 +34,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &6412211220093294557
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3061713771866485035}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bdf0c67f6d5bb9f4cb924c58555658be, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &4192929917178587359
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -59,6 +47,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _brickData: {fileID: 11400000, guid: 654346f54b355e041995934fb35d2522, type: 2}
+--- !u!65 &1089744222
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3061713771866485035}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.4, y: 0.1, z: 0.2}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &3061713772676167297
 GameObject:
   m_ObjectHideFlags: 0
