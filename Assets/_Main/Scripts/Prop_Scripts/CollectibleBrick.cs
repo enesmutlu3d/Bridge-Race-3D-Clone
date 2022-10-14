@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Collectible_Brick : MonoBehaviour, IInteractible
+public class CollectibleBrick : MonoBehaviour, IInteractible
 {
     [SerializeField] public BrickType _brickData;
     
@@ -19,8 +19,11 @@ public class Collectible_Brick : MonoBehaviour, IInteractible
         _meshRenderer.material = _brickData._material;
     }
 
-    public void OnInteract()
+    public void OnInteract(BrickType brickType)
     {
-        
+        if (brickType == _brickData)
+        {
+            Destroy(gameObject);
+        }
     }
 }

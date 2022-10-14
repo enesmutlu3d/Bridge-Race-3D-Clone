@@ -9,7 +9,7 @@ public class BrickSpawner : MonoBehaviour
     [SerializeField] private Vector2 GridSize;
 
     private GameObject _SpawnedBrick;
-    private Collectible_Brick _collectibleBrick;
+    private CollectibleBrick _collectibleBrick;
 
     private void Start()
     {
@@ -23,7 +23,7 @@ public class BrickSpawner : MonoBehaviour
             for (int j = 0; j < GridSize.y; j++)
             {
                 _SpawnedBrick = Instantiate(_brick, new Vector3 (j -4, transform.position.y, i -4), Quaternion.identity);
-                _collectibleBrick = _SpawnedBrick.GetComponent<Collectible_Brick>();
+                _collectibleBrick = _SpawnedBrick.GetComponent<CollectibleBrick>();
                 _collectibleBrick._brickData = _brickTypes[Mathf.RoundToInt(Random.Range(-0.5f,3.5f))];
                 _collectibleBrick.BrickInitializer();
             }

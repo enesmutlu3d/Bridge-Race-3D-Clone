@@ -4,11 +4,13 @@ using UnityEngine;
 
 public class PlayerCollision : MonoBehaviour
 {
+    [SerializeField] public BrickType _brickData;
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.TryGetComponent(out IInteractible interactible))
         {
-            interactible.OnInteract();
+            interactible.OnInteract(_brickData);
         }
     }
 }
