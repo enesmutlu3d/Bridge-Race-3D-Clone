@@ -9,23 +9,41 @@ public class BrickSpawner : MonoBehaviour
     [SerializeField] private Vector2 GridSize;
 
     private GameObject _SpawnedBrick;
-    private CollectibleBrick _collectibleBrick;
+    private WaitForSeconds _respawnDelay;
+
+    [HideInInspector] public List<Vector3> _respawnLocations = new List<Vector3>();
 
     private void Start()
     {
-        Spawn();
+        _respawnDelay = new WaitForSeconds(2f);
+        FirstSpawnPack();
+        StartCoroutine("RespawnCo");
     }
 
-    private void Spawn()
+    private void FirstSpawnPack()
     {
         for (int i = 0; i < GridSize.x; i++)
         {
             for (int j = 0; j < GridSize.y; j++)
             {
-                _SpawnedBrick = Instantiate(_brick, new Vector3 (j -4, transform.position.y, i -4), Quaternion.identity);
-                _collectibleBrick = _SpawnedBrick.GetComponent<CollectibleBrick>();
-                _collectibleBrick._brickData = _brickTypes[Mathf.RoundToInt(Random.Range(-0.5f,3.5f))];
-                _collectibleBrick.BrickInitializer();
+                _respawnLocations.Add(new Vector3(j - 4, transform.position.y, i - 4));
+            }
+        }
+    }
+
+    private IEnumerator RespawnCo ()
+    {
+        while (true)
+        {
+            if (_respawnLocations != null)
+            {
+                foreach (Vector3 location in _respawnLocations)
+                {
+                    _SpawnedBrick = Instantiate(_brick, location, Quaternion.identity);
+                    _SpawnedBrick.transform.parent = transform;
+                }
+                _respawnLocations.Clear();
+                yield return _respawnDelay;
             }
         }
     }
