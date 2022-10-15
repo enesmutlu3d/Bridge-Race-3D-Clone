@@ -1,4 +1,4 @@
 public interface IInteractible
 {
-    void OnInteract(BrickType brickType);
+    bool OnInteract(BrickType brickType);
 }

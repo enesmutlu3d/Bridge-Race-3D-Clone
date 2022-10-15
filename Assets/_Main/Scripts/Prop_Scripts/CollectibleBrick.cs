@@ -19,11 +19,8 @@ public class CollectibleBrick : MonoBehaviour, IInteractible
         _meshRenderer.material = _brickData._material;
     }
 
-    public void OnInteract(BrickType brickType)
+    public bool OnInteract(BrickType brickType)
     {
-        if (brickType == _brickData)
-        {
-            Destroy(gameObject);
-        }
+        return brickType == _brickData;
     }
 }

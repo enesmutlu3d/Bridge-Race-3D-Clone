@@ -534,6 +534,7 @@ GameObject:
   - component: {fileID: 4829931218018393209}
   - component: {fileID: 4829931217395566911}
   - component: {fileID: 5157554900581221602}
+  - component: {fileID: 5131727715649625755}
   - component: {fileID: 4829931217395566912}
   - component: {fileID: 1970293975}
   m_Layer: 9
@@ -589,6 +590,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _brickData: {fileID: 11400000, guid: 654346f54b355e041995934fb35d2522, type: 2}
+--- !u!114 &5131727715649625755
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4829931218018393214}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1d9bc011aedf8204db6b2383d19045fc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _stacks: []
+  _stackParent: {fileID: 3387735038022827918}
 --- !u!54 &4829931217395566912
 Rigidbody:
   m_ObjectHideFlags: 0
