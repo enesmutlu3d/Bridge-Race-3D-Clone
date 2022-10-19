@@ -532,13 +532,12 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4829931218018393209}
-  - component: {fileID: 4829931217395566911}
   - component: {fileID: 5157554900581221602}
   - component: {fileID: 5131727715649625755}
   - component: {fileID: 4829931217395566912}
   - component: {fileID: 1970293975}
   m_Layer: 9
-  m_Name: Player
+  m_Name: PlayerBase
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -561,22 +560,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &4829931217395566911
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4829931218018393214}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f37f15b9b5655aa49b353ab3418d2afe, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _floatingJoystick: {fileID: 0}
-  _rigidbody: {fileID: 4829931217395566912}
-  movementSpeed: 500
-  _animator: {fileID: 1327938963485325824}
 --- !u!114 &5157554900581221602
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -628,7 +611,7 @@ CapsuleCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4829931218018393214}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   m_Radius: 0.17
   m_Height: 1.12
