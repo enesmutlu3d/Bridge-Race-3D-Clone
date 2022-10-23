@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3061713771866485036}
   - component: {fileID: 4192929917178587359}
   - component: {fileID: 1089744222}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Brick
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -69,7 +69,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3061713772676167298}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Model
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -103,7 +103,7 @@ GameObject:
   - component: {fileID: 5068775622878493168}
   - component: {fileID: 8212370027980781141}
   - component: {fileID: 6205050227570442911}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Brick
   m_TagString: Untagged
   m_Icon: {fileID: 0}

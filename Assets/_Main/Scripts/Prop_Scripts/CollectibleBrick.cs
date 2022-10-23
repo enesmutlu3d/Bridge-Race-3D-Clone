@@ -23,11 +23,14 @@ public class CollectibleBrick : MonoBehaviour, IInteractible
         _meshRenderer.material = _brickData._material;
     }
 
-    public bool OnInteract(BrickType brickType)
+    public void OnInteract(BrickType brickType, Transform interactor)
     {
         _brickSpawner = GetComponentInParent<BrickSpawner>();
         if (_brickSpawner != null)
             _brickSpawner._respawnLocations.Add(transform.position);
-        return brickType == _brickData;
+        if (brickType == _brickData)
+        {
+            interactor.GetComponent<PlayerStackManager>().AddStack(transform.gameObject);
+        }
     }
 }

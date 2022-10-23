@@ -1,4 +1,6 @@
+using UnityEngine;
+
 public interface IInteractible
 {
-    bool OnInteract(BrickType brickType);
+    void OnInteract(BrickType brickType, Transform interactor);
 }

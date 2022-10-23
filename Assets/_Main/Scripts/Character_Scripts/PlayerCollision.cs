@@ -12,10 +12,9 @@ public class PlayerCollision : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.TryGetComponent(out IInteractible interactible) &&
-            interactible.OnInteract(_brickData))
+        if (other.TryGetComponent(out IInteractible interactible))
         {
-            _stackManager.AddStack(other.transform.gameObject);
+            interactible.OnInteract(_brickData, transform);
         }
     }
 }
