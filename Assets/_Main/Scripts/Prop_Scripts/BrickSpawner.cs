@@ -5,7 +5,6 @@ using UnityEngine;
 public class BrickSpawner : MonoBehaviour
 {
     [SerializeField] public GameObject _brick;
-    [SerializeField] public BrickType[] _brickTypes;
     [SerializeField] private Vector2 GridSize;
 
     private GameObject _SpawnedBrick;
@@ -35,6 +34,7 @@ public class BrickSpawner : MonoBehaviour
     {
         while (true)
         {
+            yield return _respawnDelay;
             if (_respawnLocations != null)
             {
                 foreach (Vector3 location in _respawnLocations)
@@ -43,7 +43,6 @@ public class BrickSpawner : MonoBehaviour
                     _SpawnedBrick.transform.parent = transform;
                 }
                 _respawnLocations.Clear();
-                yield return _respawnDelay;
             }
         }
     }
