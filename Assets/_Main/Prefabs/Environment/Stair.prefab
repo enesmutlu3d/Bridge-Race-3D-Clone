@@ -111,6 +111,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _floorCollider: {fileID: 1774682557870258306}
+  _colliderScale: 0.5
 --- !u!1 &455808240434346206
 GameObject:
   m_ObjectHideFlags: 0
@@ -222,6 +223,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _floorCollider: {fileID: 1774682557870258306}
+  _colliderScale: 0.5
 --- !u!1 &704406896751627349
 GameObject:
   m_ObjectHideFlags: 0
@@ -416,6 +418,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _floorCollider: {fileID: 1774682557870258306}
+  _colliderScale: 0.5
 --- !u!1 &826700178031038781
 GameObject:
   m_ObjectHideFlags: 0
@@ -458,7 +461,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 826700178702299128}
-  - component: {fileID: 344762128}
   m_Layer: 0
   m_Name: Stair
   m_TagString: Untagged
@@ -482,18 +484,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &344762128
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 826700178702299129}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d7ea56dc3f894b2448937eade318ccad, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &826700179727491999
 GameObject:
   m_ObjectHideFlags: 0
@@ -656,6 +646,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _floorCollider: {fileID: 1774682557870258306}
+  _colliderScale: 0.5
 --- !u!1 &2460736854785334887
 GameObject:
   m_ObjectHideFlags: 0
@@ -767,6 +758,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _floorCollider: {fileID: 1774682557870258306}
+  _colliderScale: 0.5
 --- !u!1 &3071488576537293713
 GameObject:
   m_ObjectHideFlags: 0
@@ -878,6 +870,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _floorCollider: {fileID: 1774682557870258306}
+  _colliderScale: 0.5
 --- !u!1 &3303779130214682126
 GameObject:
   m_ObjectHideFlags: 0
@@ -989,6 +982,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _floorCollider: {fileID: 1774682557870258306}
+  _colliderScale: 0.5
 --- !u!1 &3318444143766535841
 GameObject:
   m_ObjectHideFlags: 0
@@ -1145,6 +1139,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _floorCollider: {fileID: 1774682557870258306}
+  _colliderScale: 0.5
 --- !u!1 &4050303027240384042
 GameObject:
   m_ObjectHideFlags: 0
@@ -1256,6 +1251,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _floorCollider: {fileID: 1774682557870258306}
+  _colliderScale: 0.5
 --- !u!1 &4252902071244751001
 GameObject:
   m_ObjectHideFlags: 0
@@ -1367,6 +1363,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _floorCollider: {fileID: 1774682557870258306}
+  _colliderScale: 0.5
 --- !u!1 &4365743384961657403
 GameObject:
   m_ObjectHideFlags: 0
@@ -1478,6 +1475,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _floorCollider: {fileID: 1774682557870258306}
+  _colliderScale: 0.5
 --- !u!1 &5697483978735164924
 GameObject:
   m_ObjectHideFlags: 0
@@ -1589,6 +1587,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _floorCollider: {fileID: 1774682557870258306}
+  _colliderScale: 0.5
 --- !u!1 &5729647139217998213
 GameObject:
   m_ObjectHideFlags: 0
@@ -1700,6 +1699,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _floorCollider: {fileID: 1774682557870258306}
+  _colliderScale: 0.5
 --- !u!1 &6123362832834248559
 GameObject:
   m_ObjectHideFlags: 0
@@ -1811,6 +1811,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _floorCollider: {fileID: 1774682557870258306}
+  _colliderScale: 0.5
 --- !u!1 &6724696674166508715
 GameObject:
   m_ObjectHideFlags: 0
@@ -1922,6 +1923,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _floorCollider: {fileID: 1774682557870258306}
+  _colliderScale: 0.5
 --- !u!1 &7400542007314833422
 GameObject:
   m_ObjectHideFlags: 0
@@ -2119,6 +2121,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _floorCollider: {fileID: 1774682557870258306}
+  _colliderScale: 0.5
 --- !u!1 &7919014577008988714
 GameObject:
   m_ObjectHideFlags: 0
@@ -2230,6 +2233,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _floorCollider: {fileID: 1774682557870258306}
+  _colliderScale: 0.5
 --- !u!1 &8294568407127953231
 GameObject:
   m_ObjectHideFlags: 0
@@ -2341,6 +2345,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _floorCollider: {fileID: 1774682557870258306}
+  _colliderScale: 0.5
 --- !u!1 &8433587230272703742
 GameObject:
   m_ObjectHideFlags: 0
@@ -2452,6 +2457,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _floorCollider: {fileID: 1774682557870258306}
+  _colliderScale: 0.5
 --- !u!1 &8854810364248662118
 GameObject:
   m_ObjectHideFlags: 0
@@ -2563,3 +2569,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _floorCollider: {fileID: 1774682557870258306}
+  _colliderScale: 0.5

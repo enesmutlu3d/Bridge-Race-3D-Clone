@@ -41,9 +41,6 @@ public class BrickSpawner : MonoBehaviour
             {
                 foreach (Vector3 location in _respawnLocations)
                 {
-                    //_SpawnedBrick = Instantiate(_brick, location, Quaternion.identity);
-                    //_SpawnedBrick.transform.parent = transform;
-
                     if (Random.Range(-0.49f, 3.49f) < _activeBrickTypes.Count)
                     {
                         _SpawnedBrick = Instantiate(_brick, transform);

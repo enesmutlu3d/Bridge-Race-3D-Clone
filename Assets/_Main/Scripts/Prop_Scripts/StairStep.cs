@@ -9,11 +9,15 @@ public class StairStep : MonoBehaviour, IInteractible
     private BrickType _currentBrickType;
     private PlayerStackManager _playerStack;
     private bool isEmpty = true;
+    private int _colliderScale = 1;
     [SerializeField] private Transform _floorCollider;
+    [SerializeField] private bool _isShort;
 
     private void Awake()
     {
         _meshRenderer = GetComponent<MeshRenderer>();
+        if (_isShort)
+            _colliderScale = 2;
     }
 
     public void OnInteract(BrickType brickType, Transform interactor)
@@ -36,7 +40,7 @@ public class StairStep : MonoBehaviour, IInteractible
         if (isEmpty)
         {
             isEmpty = false;
-            _floorCollider.localScale += Vector3.forward * 0.05f;
+            _floorCollider.localScale += Vector3.forward * 0.05f * _colliderScale;
         }
     }
 }
