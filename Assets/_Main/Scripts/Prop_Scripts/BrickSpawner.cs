@@ -6,9 +6,11 @@ public class BrickSpawner : MonoBehaviour
 {
     [SerializeField] public GameObject _brick;
     [SerializeField] private Vector2 GridSize;
+    public List<BrickType> _activeBrickTypes = new List<BrickType>();
 
     private GameObject _SpawnedBrick;
     private WaitForSeconds _respawnDelay;
+    private int _randomVar;
 
     [HideInInspector] public List<Vector3> _respawnLocations = new List<Vector3>();
 
@@ -16,7 +18,7 @@ public class BrickSpawner : MonoBehaviour
     {
         _respawnDelay = new WaitForSeconds(2f);
         FirstSpawnPack();
-        StartCoroutine("RespawnCo");
+        StartCoroutine(nameof(RespawnCo));
     }
 
     private void FirstSpawnPack()
@@ -25,25 +27,34 @@ public class BrickSpawner : MonoBehaviour
         {
             for (int j = 0; j < GridSize.y; j++)
             {
-                _respawnLocations.Add(new Vector3(j - 4, transform.position.y, i - 4));
+                _respawnLocations.Add(new Vector3(j - 4, 0f, i - 4));
             }
         }
     }
 
     private IEnumerator RespawnCo ()
     {
+        yield return new WaitForEndOfFrame();
         while (true)
         {
-            yield return _respawnDelay;
             if (_respawnLocations != null)
             {
                 foreach (Vector3 location in _respawnLocations)
                 {
-                    _SpawnedBrick = Instantiate(_brick, location, Quaternion.identity);
-                    _SpawnedBrick.transform.parent = transform;
+                    //_SpawnedBrick = Instantiate(_brick, location, Quaternion.identity);
+                    //_SpawnedBrick.transform.parent = transform;
+
+                    if (Random.Range(-0.49f, 3.49f) < _activeBrickTypes.Count)
+                    {
+                        _SpawnedBrick = Instantiate(_brick, transform);
+                        _SpawnedBrick.transform.localPosition = location;
+                        _randomVar = Mathf.RoundToInt(Random.Range(-0.49f, _activeBrickTypes.Count - 0.51f));
+                        _SpawnedBrick.GetComponent<CollectibleBrick>().BrickInitializer(_activeBrickTypes[_randomVar]);
+                    }
                 }
                 _respawnLocations.Clear();
             }
+            yield return _respawnDelay;
         }
     }
 }

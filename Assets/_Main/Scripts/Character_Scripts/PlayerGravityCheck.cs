@@ -12,7 +12,7 @@ public class PlayerGravityCheck : MonoBehaviour
     
     private void Start()
     {
-        _checkerPeriod = new WaitForSeconds(0.1f);
+        _checkerPeriod = new WaitForSeconds(0.02f);
         StartCoroutine("GravityChecker");
     }
 
@@ -20,7 +20,7 @@ public class PlayerGravityCheck : MonoBehaviour
     {
         while (true)
         {
-            if (Physics.Raycast(rayPos.transform.position, rayPos.transform.forward, out _hit, 0.1f))
+            if (Physics.Raycast(rayPos.transform.position, rayPos.transform.forward, out _hit, 0.2f))
             {
                 _rigidbody.useGravity = false;
             }

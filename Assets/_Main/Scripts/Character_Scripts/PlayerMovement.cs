@@ -47,7 +47,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void MovePlayer()
     {
-        playerSpeed = movementSpeed * Time.deltaTime * targetDirection.magnitude;
+        playerSpeed = movementSpeed * targetDirection.magnitude;
         _rigidbody.velocity = transform.forward * playerSpeed;
     }
 
