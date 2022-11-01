@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3415018872914154260}
   - component: {fileID: 3415018872914154261}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Brick_Spawner
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -45,9 +45,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _brick: {fileID: 3061713771866485035, guid: 0ff5b269d7776cc429f02ba04f8e1b6e, type: 3}
-  _brickTypes:
-  - {fileID: 11400000, guid: 654346f54b355e041995934fb35d2522, type: 2}
-  - {fileID: 11400000, guid: 1ee7cb91e57c16241b5fe0d18f9ed50c, type: 2}
-  - {fileID: 11400000, guid: 2797efac7f5baec41a90cacd06825bb6, type: 2}
-  - {fileID: 11400000, guid: 3f83f825c66eb524d98a552b57f68bd7, type: 2}
   GridSize: {x: 9, y: 9}
+  _activeBrickTypes: []
+  _respawnLocations: []

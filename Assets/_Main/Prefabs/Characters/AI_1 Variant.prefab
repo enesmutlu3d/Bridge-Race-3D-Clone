@@ -69,11 +69,6 @@ PrefabInstance:
       objectReference: {fileID: 11400000, guid: 1ee7cb91e57c16241b5fe0d18f9ed50c, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 028618eaddec025459803eecc2a62fcf, type: 3}
---- !u!54 &3652588466107414618 stripped
-Rigidbody:
-  m_CorrespondingSourceObject: {fileID: 4829931217395566912, guid: 028618eaddec025459803eecc2a62fcf, type: 3}
-  m_PrefabInstance: {fileID: 8194234658186834202}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &3652588467917286756 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4829931218018393214, guid: 028618eaddec025459803eecc2a62fcf, type: 3}
@@ -90,9 +85,9 @@ NavMeshAgent:
   m_AgentTypeID: 0
   m_Radius: 0.2
   m_Speed: 3.5
-  m_Acceleration: 8
+  m_Acceleration: 20
   avoidancePriority: 50
-  m_AngularSpeed: 120
+  m_AngularSpeed: 2160
   m_StoppingDistance: 0
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
@@ -113,10 +108,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 687db7aa7d0c92849a0d6d5d9606f40e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _rigidbody: {fileID: 3652588466107414618}
-  movementSpeed: 500
-  _animator: {fileID: 7195077039225490202}
   _agent: {fileID: 1315596478}
+  _brickSpawner: {fileID: 0}
+  _animator: {fileID: 7195077039225490202}
 --- !u!95 &7195077039225490202 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 1327938963485325824, guid: 028618eaddec025459803eecc2a62fcf, type: 3}

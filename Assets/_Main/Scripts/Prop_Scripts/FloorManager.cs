@@ -1,7 +1,4 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class FloorManager : MonoBehaviour
@@ -24,11 +21,18 @@ public class FloorManager : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        //Brick Spawner Set
         _brickSpawner.enabled = true;
         _colliderData = other.GetComponent<PlayerCollision>()._brickData;
         if (_brickTypes.Contains(_colliderData))
             return;
         _brickTypes.Add(_colliderData);
         _brickSpawner._activeBrickTypes.Add(_colliderData);
+        
+        //AI
+        if (TryGetComponent(out AiMovement aiMovement))
+        {
+            aiMovement.BrickCollector(_brickSpawner);
+        }
     }
 }

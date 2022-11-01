@@ -23,11 +23,11 @@ public class BrickSpawner : MonoBehaviour
 
     private void FirstSpawnPack()
     {
-        for (int i = 0; i < GridSize.x; i++)
+        for (float i = -1 * (GridSize.x * 0.5f); i < (GridSize.x * 0.5f); i++)
         {
-            for (int j = 0; j < GridSize.y; j++)
+            for (float j = -1 * (GridSize.y * 0.5f); j < (GridSize.y * 0.5f); j++)
             {
-                _respawnLocations.Add(new Vector3(j - 4, 0f, i - 4));
+                _respawnLocations.Add(new Vector3(j + 0.5f, 0f, i + 0.5f));
             }
         }
     }

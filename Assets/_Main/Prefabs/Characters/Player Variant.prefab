@@ -21,7 +21,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4829931218018393209, guid: 028618eaddec025459803eecc2a62fcf, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 1.63
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 4829931218018393209, guid: 028618eaddec025459803eecc2a62fcf, type: 3}
       propertyPath: m_LocalPosition.y
@@ -29,11 +29,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4829931218018393209, guid: 028618eaddec025459803eecc2a62fcf, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -1.049
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4829931218018393209, guid: 028618eaddec025459803eecc2a62fcf, type: 3}
       propertyPath: m_LocalRotation.w
-      value: -0.00000035762784
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4829931218018393209, guid: 028618eaddec025459803eecc2a62fcf, type: 3}
       propertyPath: m_LocalRotation.x
@@ -41,7 +41,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4829931218018393209, guid: 028618eaddec025459803eecc2a62fcf, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -1
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 4829931218018393209, guid: 028618eaddec025459803eecc2a62fcf, type: 3}
       propertyPath: m_LocalRotation.z
@@ -53,7 +53,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4829931218018393209, guid: 028618eaddec025459803eecc2a62fcf, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: -180
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4829931218018393209, guid: 028618eaddec025459803eecc2a62fcf, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
@@ -89,7 +89,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _floatingJoystick: {fileID: 0}
   _rigidbody: {fileID: 1242087558533991937}
-  movementSpeed: 500
+  movementSpeed: 3.5
   _animator: {fileID: 4635995825477418305}
 --- !u!95 &4635995825477418305 stripped
 Animator:
