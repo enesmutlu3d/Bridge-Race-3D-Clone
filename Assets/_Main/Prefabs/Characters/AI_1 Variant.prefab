@@ -7,6 +7,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -7918225193619820377, guid: 028618eaddec025459803eecc2a62fcf, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1970293975, guid: 028618eaddec025459803eecc2a62fcf, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1970293975, guid: 028618eaddec025459803eecc2a62fcf, type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 1327938963485325824, guid: 028618eaddec025459803eecc2a62fcf, type: 3}
       propertyPath: m_Controller
       value: 
@@ -15,6 +27,10 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: f524d236d4b0ee9449adce07e0dcba38, type: 2}
+    - target: {fileID: 4829931217395566912, guid: 028618eaddec025459803eecc2a62fcf, type: 3}
+      propertyPath: m_Constraints
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4829931218018393209, guid: 028618eaddec025459803eecc2a62fcf, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -111,6 +127,7 @@ MonoBehaviour:
   _agent: {fileID: 1315596478}
   _brickSpawner: {fileID: 0}
   _animator: {fileID: 7195077039225490202}
+  _finishLine: {fileID: 0}
 --- !u!95 &7195077039225490202 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 1327938963485325824, guid: 028618eaddec025459803eecc2a62fcf, type: 3}

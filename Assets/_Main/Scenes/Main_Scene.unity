@@ -108,10 +108,10 @@ NavMeshSettings:
     agentTypeID: 0
     agentRadius: 0.2
     agentHeight: 1.4
-    agentSlope: 55
+    agentSlope: 60
     agentClimb: 0.4
-    ledgeDropHeight: 0
-    maxJumpAcrossDistance: 0
+    ledgeDropHeight: 0.2
+    maxJumpAcrossDistance: 0.2
     minRegionArea: 2
     manualCellSize: 0
     cellSize: 0.06666667
@@ -335,7 +335,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 4, y: 0.1, z: 1}
+  m_Size: {x: 4, y: 0.1, z: 1.2}
   m_Center: {x: 0, y: 0.05, z: 0}
 --- !u!1 &330585543
 GameObject:
@@ -864,7 +864,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 9.5, y: 1, z: 9.5}
+  m_Size: {x: 9.5, y: 1, z: 10.06}
   m_Center: {x: 0, y: 0.5, z: 0}
 --- !u!1001 &661260622
 PrefabInstance:
@@ -923,7 +923,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3415018872914154263, guid: 8e56de4f35cc6044a9e160a5a63f03db, type: 3}
       propertyPath: m_Name
-      value: Brick_Spawner
+      value: Brick_Spawner2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8e56de4f35cc6044a9e160a5a63f03db, type: 3}
@@ -941,6 +941,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 750530328}
+  - component: {fileID: 750530329}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -963,6 +964,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &750530329
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 750530327}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 35112f7ff1dfd4244b57bbb4d19779c9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1007225568
 GameObject:
   m_ObjectHideFlags: 0
@@ -1083,7 +1096,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 4.75, y: 1, z: 4.75}
+  m_Size: {x: 4.75, y: 1, z: 5.19}
   m_Center: {x: 0, y: 0.5, z: 0}
 --- !u!114 &1136125180
 MonoBehaviour:
@@ -1345,7 +1358,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 9.5, y: 1, z: 9.5}
+  m_Size: {x: 9.5, y: 1, z: 10.06}
   m_Center: {x: 0, y: 0.5, z: 0}
 --- !u!1001 &1506450518
 PrefabInstance:
@@ -2142,6 +2155,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: AI_3
       objectReference: {fileID: 0}
+    - target: {fileID: 1192604118513665086, guid: cf57db3134a79034fb1ac4570aafe557, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6173544435835422922, guid: cf57db3134a79034fb1ac4570aafe557, type: 3}
       propertyPath: _finishLine
       value: 
@@ -2162,6 +2179,10 @@ PrefabInstance:
     - target: {fileID: 1539836625551951874, guid: 171422fb9b99eb041a88e5045b738f96, type: 3}
       propertyPath: m_Name
       value: AI_2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1539836625551951874, guid: 171422fb9b99eb041a88e5045b738f96, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1539836625551951877, guid: 171422fb9b99eb041a88e5045b738f96, type: 3}
       propertyPath: m_RootOrder

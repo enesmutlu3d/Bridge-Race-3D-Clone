@@ -22,17 +22,20 @@ public class FloorManager : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         //Brick Spawner Set
-        _brickSpawner.enabled = true;
         _colliderData = other.GetComponent<PlayerCollision>()._brickData;
-        if (_brickTypes.Contains(_colliderData))
-            return;
-        _brickTypes.Add(_colliderData);
-        _brickSpawner._activeBrickTypes.Add(_colliderData);
+        if (!_brickTypes.Contains(_colliderData))
+        {
+            _brickTypes.Add(_colliderData);
+            _brickSpawner._activeBrickTypes.Add(_colliderData);
+        }
+        _brickSpawner.enabled = true;
         
         //AI
-        if (TryGetComponent(out AiMovement aiMovement))
+        if (other.TryGetComponent(out AiMovement aiMovement))
         {
             aiMovement.BrickCollector(_brickSpawner);
+            aiMovement._brickSpawner = _brickSpawner;
+            _brickSpawner.SpawnPack();
         }
     }
 }

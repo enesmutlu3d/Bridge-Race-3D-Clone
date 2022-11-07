@@ -23,11 +23,26 @@ public class BrickSpawner : MonoBehaviour
 
     private void FirstSpawnPack()
     {
+        if (_activeBrickTypes.Count < 1)
+            return;
+        
         for (float i = -1 * (GridSize.x * 0.5f); i < (GridSize.x * 0.5f); i++)
         {
             for (float j = -1 * (GridSize.y * 0.5f); j < (GridSize.y * 0.5f); j++)
             {
                 _respawnLocations.Add(new Vector3(j + 0.5f, 0f, i + 0.5f));
+            }
+        }
+    }
+
+    public void SpawnPack()
+    {
+        for (float i = -1 * (GridSize.x * 0.5f); i < (GridSize.x * 0.5f); i++)
+        {
+            for (float j = -1 * (GridSize.y * 0.5f); j < (GridSize.y * 0.5f); j++)
+            {
+                if (Random.Range(0,10) < 3)
+                    _respawnLocations.Add(new Vector3(j + 0.5f, 0f, i + 0.5f));
             }
         }
     }
@@ -41,13 +56,19 @@ public class BrickSpawner : MonoBehaviour
             {
                 foreach (Vector3 location in _respawnLocations)
                 {
-                    if (Random.Range(-0.49f, 3.49f) < _activeBrickTypes.Count)
+                    _SpawnedBrick = Instantiate(_brick, transform);
+                    _SpawnedBrick.transform.localPosition = location;
+                    _randomVar = Mathf.RoundToInt(Random.Range(-0.49f, _activeBrickTypes.Count - 0.51f));
+                    _SpawnedBrick.GetComponent<CollectibleBrick>().BrickInitializer(_activeBrickTypes[_randomVar]);
+                    
+                    /*if (Random.Range(-0.49f, 3.49f) < _activeBrickTypes.Count)
                     {
                         _SpawnedBrick = Instantiate(_brick, transform);
                         _SpawnedBrick.transform.localPosition = location;
                         _randomVar = Mathf.RoundToInt(Random.Range(-0.49f, _activeBrickTypes.Count - 0.51f));
                         _SpawnedBrick.GetComponent<CollectibleBrick>().BrickInitializer(_activeBrickTypes[_randomVar]);
-                    }
+                        
+                    }*/
                 }
                 _respawnLocations.Clear();
             }

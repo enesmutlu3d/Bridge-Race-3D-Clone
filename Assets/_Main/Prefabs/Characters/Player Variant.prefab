@@ -91,6 +91,18 @@ MonoBehaviour:
   _rigidbody: {fileID: 1242087558533991937}
   movementSpeed: 3.5
   _animator: {fileID: 4635995825477418305}
+--- !u!114 &1966253881539538351
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1242087559026793279}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62d552460d474db42a4f41b7246c7605, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!95 &4635995825477418305 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 1327938963485325824, guid: 028618eaddec025459803eecc2a62fcf, type: 3}
