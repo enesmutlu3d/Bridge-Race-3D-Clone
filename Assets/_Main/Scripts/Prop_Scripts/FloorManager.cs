@@ -37,5 +37,9 @@ public class FloorManager : MonoBehaviour
             aiMovement._brickSpawner = _brickSpawner;
             _brickSpawner.SpawnPack();
         }
+        
+        //Player
+        if (other.TryGetComponent(out PlayerMovement playerMovement))
+            _brickSpawner.SpawnPack();
     }
 }

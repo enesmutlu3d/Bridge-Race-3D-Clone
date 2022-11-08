@@ -20,7 +20,7 @@ public class CollectibleBrick : MonoBehaviour, IInteractible
             return;
         _brickSpawner = GetComponentInParent<BrickSpawner>();
         if (_brickSpawner != null)
-            _brickSpawner._respawnLocations.Add(transform.localPosition);
+            _brickSpawner._emptyLocations.Add(transform.localPosition);
         interactor.GetComponent<PlayerStackManager>().AddStack(transform.gameObject);
     }
 }
