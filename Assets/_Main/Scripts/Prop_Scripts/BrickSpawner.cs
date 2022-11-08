@@ -13,6 +13,7 @@ public class BrickSpawner : MonoBehaviour
     private int _randomVar;
 
     [HideInInspector] public List<Vector3> _respawnLocations = new List<Vector3>();
+    [HideInInspector] public List<Vector3> _emptyLocations = new List<Vector3>();
 
     private void Start()
     {
@@ -23,7 +24,7 @@ public class BrickSpawner : MonoBehaviour
 
     private void FirstSpawnPack()
     {
-        if (_activeBrickTypes.Count < 1)
+        if (_activeBrickTypes.Count < 4)
             return;
         
         for (float i = -1 * (GridSize.x * 0.5f); i < (GridSize.x * 0.5f); i++)
@@ -60,15 +61,6 @@ public class BrickSpawner : MonoBehaviour
                     _SpawnedBrick.transform.localPosition = location;
                     _randomVar = Mathf.RoundToInt(Random.Range(-0.49f, _activeBrickTypes.Count - 0.51f));
                     _SpawnedBrick.GetComponent<CollectibleBrick>().BrickInitializer(_activeBrickTypes[_randomVar]);
-                    
-                    /*if (Random.Range(-0.49f, 3.49f) < _activeBrickTypes.Count)
-                    {
-                        _SpawnedBrick = Instantiate(_brick, transform);
-                        _SpawnedBrick.transform.localPosition = location;
-                        _randomVar = Mathf.RoundToInt(Random.Range(-0.49f, _activeBrickTypes.Count - 0.51f));
-                        _SpawnedBrick.GetComponent<CollectibleBrick>().BrickInitializer(_activeBrickTypes[_randomVar]);
-                        
-                    }*/
                 }
                 _respawnLocations.Clear();
             }

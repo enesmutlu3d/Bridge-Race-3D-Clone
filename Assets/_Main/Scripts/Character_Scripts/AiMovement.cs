@@ -57,7 +57,7 @@ public class AiMovement : MonoBehaviour
 
     private IEnumerator AiMoveCo()
     {
-        _random2 = Random.Range(5, 21);
+        _random2 = Random.Range(2, 21);
         
         while (true)
         {
