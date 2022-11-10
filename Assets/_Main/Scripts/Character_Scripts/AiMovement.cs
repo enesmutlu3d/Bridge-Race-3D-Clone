@@ -19,6 +19,8 @@ public class AiMovement : MonoBehaviour
     private Vector3 _destinationPos;
     private Transform _temp;
     private WaitForSeconds _checkDelay;
+    private Coroutine MoveCoroutine;
+    private Coroutine AnimatorStateCoroutine;
     
     private void Start()
     {
@@ -26,12 +28,8 @@ public class AiMovement : MonoBehaviour
         _stackManager = GetComponent<PlayerStackManager>();
         _playerCollision = GetComponent<PlayerCollision>();
         _destinationPos = transform.position;
-        StartCoroutine("AiMoveCo");
-    }
-    
-    private void FixedUpdate()
-    {
-        _animator.SetBool("isWalking", !(_agent.remainingDistance < 1f));
+        MoveCoroutine = StartCoroutine("AiMoveCo");
+        AnimatorStateCoroutine = StartCoroutine("AnimatorStateCo");
     }
 
     public void BrickCollector(BrickSpawner brickSpawner)
@@ -57,38 +55,40 @@ public class AiMovement : MonoBehaviour
 
     private IEnumerator AiMoveCo()
     {
-        _random2 = Random.Range(2, 21);
-        
         while (true)
         {
-            _agent.SetDestination(_destinationPos);
-            yield return new WaitForSeconds(Random.Range(1.25f, 2.5f));
-            if (_stackManager._stacks.Count > _random2)
+            _random2 = Random.Range(2, 21);
+
+            do
             {
-                StartCoroutine("GoStairsCo");
-                break;
-            }
-            else
-            {
+                _agent.SetDestination(_destinationPos);
+                yield return new WaitForSeconds(Random.Range(1.25f,2.25f));
                 DestinationPick();
-            }
+            } while (_stackManager._stacks.Count < _random2);
+        
+            _agent.SetDestination(_finishLine.position);
+            
+            do
+            {
+                yield return _checkDelay;
+            } while (_stackManager._stacks.Count > 0);
         }
     }
 
-    private IEnumerator GoStairsCo()
+    private IEnumerator AnimatorStateCo()
     {
-        _agent.SetDestination(_finishLine.position);
-        
         while (true)
         {
-            if (_stackManager._stacks.Count <= 0)
-            {
-                StartCoroutine("AiMoveCo");
-                break;
-            }
-            
+            _animator.SetBool("isWalking", !(_agent.remainingDistance < 0.5f));
             yield return _checkDelay;
         }
+    }
+
+    public void FinishState()
+    {
+        StopCoroutine(MoveCoroutine);
+        StopCoroutine(AnimatorStateCoroutine);
+        _agent.enabled = false;
     }
     
 }

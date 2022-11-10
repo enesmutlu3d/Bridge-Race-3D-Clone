@@ -49,8 +49,7 @@ public class FinishManager : MonoBehaviour, IInteractible
             //Player Movement Stop
             if (_playersInOrder[i].TryGetComponent<AiMovement>(out AiMovement aiMovement))
             {
-                aiMovement.enabled = false;
-                aiMovement.GetComponent<NavMeshAgent>().enabled = false;
+                aiMovement.FinishState();
             }
             if (_playersInOrder[i].TryGetComponent<PlayerMovement>(out PlayerMovement playerMovement))
             {
