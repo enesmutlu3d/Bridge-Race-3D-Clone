@@ -46,23 +46,30 @@ public class FinishManager : MonoBehaviour, IInteractible
     {
         for (int i = 0; i < _playersInOrder.Count; i++)
         {
+            //Player Movement Stop
             if (_playersInOrder[i].TryGetComponent<AiMovement>(out AiMovement aiMovement))
             {
                 aiMovement.enabled = false;
                 aiMovement.GetComponent<NavMeshAgent>().enabled = false;
-                aiMovement.GetComponent<Rigidbody>().isKinematic = true;
+            }
+            if (_playersInOrder[i].TryGetComponent<PlayerMovement>(out PlayerMovement playerMovement))
+            {
+                playerMovement.enabled = false;
             }
             
+            //Player Animations
             if (i == 0)
                 _playersInOrder[i].GetComponentInChildren<Animator>().SetTrigger("EndAnimationWin");
             else if (i > 0)
                 _playersInOrder[i].GetComponentInChildren<Animator>().SetTrigger("EndAnimationLose");
             
+            //Place Players
+            _playersInOrder[i].GetComponent<Rigidbody>().isKinematic = true;
             _playersInOrder[i].transform.position = _ladderLocations[i].transform.position;
             _playersInOrder[i].transform.rotation = Quaternion.Euler(0,180,0);
         }
+        
         _cam.Priority = 2;
-            
         _confetti1.Play();
         _confetti2.Play();
         
