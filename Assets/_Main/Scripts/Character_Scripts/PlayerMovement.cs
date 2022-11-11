@@ -1,17 +1,25 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    [SerializeField] private FloatingJoystick _floatingJoystick;
     [SerializeField] private Rigidbody _rigidbody;
     [SerializeField] private float movementSpeed;
     [SerializeField] private Animator _animator;
 
+    private FloatingJoystick _floatingJoystick;
     private Vector2 targetDirection;
     private Vector3 targetAngle;
     private float playerSpeed;
+
+    private void Start()
+    {
+        //Add Player to Finish Manager
+        GameObject.FindWithTag("FinishLine").GetComponentInParent<FinishManager>()._players.Add(transform.gameObject);
+        _floatingJoystick = GameObject.FindWithTag("JoyStick").GetComponent<FloatingJoystick>();
+    }
 
     private void Update()
     {

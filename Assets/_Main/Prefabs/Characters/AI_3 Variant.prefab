@@ -127,7 +127,6 @@ MonoBehaviour:
   _agent: {fileID: 6020090022491326844}
   _brickSpawner: {fileID: 0}
   _animator: {fileID: 4748604393338954304}
-  _finishLine: {fileID: 0}
 --- !u!95 &4748604393338954304 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 1327938963485325824, guid: 028618eaddec025459803eecc2a62fcf, type: 3}

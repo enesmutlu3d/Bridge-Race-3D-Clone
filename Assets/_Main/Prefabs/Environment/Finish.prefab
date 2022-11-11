@@ -672,7 +672,7 @@ GameObject:
   - component: {fileID: 3836937433451666984}
   m_Layer: 10
   m_Name: FinishLine
-  m_TagString: Untagged
+  m_TagString: FinishLine
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1015,7 +1015,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3836937434286437163}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 6.315, z: 23.73}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1047,11 +1047,7 @@ MonoBehaviour:
   _cam: {fileID: 3836937432447238223}
   _confetti1: {fileID: 3836937434051108078}
   _confetti2: {fileID: 8443955056314757022}
-  _players:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  _players: []
 --- !u!65 &3836937434286437166
 BoxCollider:
   m_ObjectHideFlags: 0

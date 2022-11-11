@@ -6,12 +6,12 @@ using Random = UnityEngine.Random;
 public class AiMovement : MonoBehaviour
 {
     [SerializeField] private NavMeshAgent _agent;
-    [SerializeField] public BrickSpawner _brickSpawner;
+    [HideInInspector] public BrickSpawner _brickSpawner;
     [SerializeField] private Animator _animator;
-    [SerializeField] private Transform _finishLine;
 
     private PlayerStackManager _stackManager;
     private PlayerCollision _playerCollision;
+    private Transform _finishLine;
     
     private int _random;
     private int _random2;
@@ -24,10 +24,18 @@ public class AiMovement : MonoBehaviour
     
     private void Start()
     {
+        //Injections
+        _brickSpawner = GameObject.FindWithTag("FirstFloorBrickSpawner").GetComponent<BrickSpawner>();
+        _finishLine = GameObject.FindWithTag("FinishLine").transform;
+        _finishLine.GetComponentInParent<FinishManager>()._players.Add(transform.gameObject);
+
+        //Caching
         _checkDelay = new WaitForSeconds(0.2f);
         _stackManager = GetComponent<PlayerStackManager>();
         _playerCollision = GetComponent<PlayerCollision>();
         _destinationPos = transform.position;
+        
+        //Start Routines
         MoveCoroutine = StartCoroutine("AiMoveCo");
         AnimatorStateCoroutine = StartCoroutine("AnimatorStateCo");
     }
