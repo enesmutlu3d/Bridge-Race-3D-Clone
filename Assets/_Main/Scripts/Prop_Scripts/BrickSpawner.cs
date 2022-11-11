@@ -67,6 +67,8 @@ public class BrickSpawner : MonoBehaviour
                 {
                     _SpawnedBrick = _poolManager.SpawnBrickFromPool(transform);
                     _SpawnedBrick.transform.localPosition = location;
+                    _SpawnedBrick.transform.rotation = Quaternion.identity;
+                    _SpawnedBrick.SetActive(true);
                     _randomVar = Mathf.RoundToInt(Random.Range(-0.49f, _activeBrickTypes.Count - 0.51f));
                     _SpawnedBrick.GetComponent<CollectibleBrick>().BrickInitializer(_activeBrickTypes[_randomVar]);
                 }

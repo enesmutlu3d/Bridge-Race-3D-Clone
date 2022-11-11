@@ -30,7 +30,7 @@ public class AiMovement : MonoBehaviour
         _finishLine.GetComponentInParent<FinishManager>()._players.Add(transform.gameObject);
 
         //Caching
-        _checkDelay = new WaitForSeconds(0.2f);
+        _checkDelay = new WaitForSeconds(0.1f);
         _stackManager = GetComponent<PlayerStackManager>();
         _playerCollision = GetComponent<PlayerCollision>();
         _destinationPos = transform.position;

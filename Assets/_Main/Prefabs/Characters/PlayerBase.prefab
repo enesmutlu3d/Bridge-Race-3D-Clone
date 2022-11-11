@@ -568,6 +568,7 @@ GameObject:
   - component: {fileID: 4829931217395566912}
   - component: {fileID: 1970293975}
   - component: {fileID: -7918225193619820377}
+  - component: {fileID: 7746454833317307817}
   m_Layer: 9
   m_Name: PlayerBase
   m_TagString: Untagged
@@ -664,6 +665,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rayPos: {fileID: 7710584534086225599}
   _rigidbody: {fileID: 4829931217395566912}
+--- !u!65 &7746454833317307817
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4829931218018393214}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 0.5, z: 1}
+  m_Center: {x: 0, y: 0.27, z: 0}
 --- !u!1 &4839058199907141992
 GameObject:
   m_ObjectHideFlags: 0

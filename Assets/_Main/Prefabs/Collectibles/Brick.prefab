@@ -46,13 +46,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4987ae4edf3d1fa41a75007e5c0def53, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _brickData: {fileID: 11400000, guid: 654346f54b355e041995934fb35d2522, type: 2}
-  _brickTypes:
-  - {fileID: 11400000, guid: 654346f54b355e041995934fb35d2522, type: 2}
-  - {fileID: 11400000, guid: 1ee7cb91e57c16241b5fe0d18f9ed50c, type: 2}
-  - {fileID: 11400000, guid: 2797efac7f5baec41a90cacd06825bb6, type: 2}
-  - {fileID: 11400000, guid: 3f83f825c66eb524d98a552b57f68bd7, type: 2}
   _meshRenderer: {fileID: 6205050227570442911}
+  _brickSpawner: {fileID: 0}
+  _brickType: {fileID: 0}
 --- !u!65 &1089744222
 BoxCollider:
   m_ObjectHideFlags: 0

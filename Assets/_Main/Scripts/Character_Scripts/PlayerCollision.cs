@@ -17,4 +17,12 @@ public class PlayerCollision : MonoBehaviour
             interactible.OnInteract(_brickData, transform);
         }
     }
+
+    
+    // TO DO Spread Bricks
+    /*public void OnInteract(BrickType brickType, Transform interactor)
+    {
+        if (interactor.GetComponent<PlayerStackManager>()._stacks.Count > _stackManager._stacks.Count)
+            _stackManager.StackSpread();
+    }*/
 }

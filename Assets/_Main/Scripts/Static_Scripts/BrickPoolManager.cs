@@ -31,7 +31,6 @@ public class BrickPoolManager : MonoBehaviour
             _temp.SetActive(false);
         }
         _temp = _bricks[0];
-        _temp.SetActive(true);
         _bricks.Remove(_bricks[0]);
         _temp.transform.SetParent(transform);
         return _temp;

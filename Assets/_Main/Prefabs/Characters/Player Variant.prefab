@@ -15,6 +15,10 @@ PrefabInstance:
       propertyPath: _floatingJoystick
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 4829931217395566912, guid: 028618eaddec025459803eecc2a62fcf, type: 3}
+      propertyPath: m_Constraints
+      value: 112
+      objectReference: {fileID: 0}
     - target: {fileID: 4829931218018393209, guid: 028618eaddec025459803eecc2a62fcf, type: 3}
       propertyPath: m_RootOrder
       value: 0

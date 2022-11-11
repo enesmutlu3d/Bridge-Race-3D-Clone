@@ -5,7 +5,7 @@ using UnityEngine;
 public class CollectibleBrick : MonoBehaviour, IInteractible
 {
     [SerializeField] private MeshRenderer _meshRenderer;
-    private BrickSpawner _brickSpawner;
+    [HideInInspector] public BrickSpawner _brickSpawner;
     [HideInInspector] public BrickType _brickType;
 
     public void BrickInitializer (BrickType brickType)
