@@ -302,6 +302,52 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3836937433451666984, guid: 0706a3c779f219f4dbeeca454d33b4fd, type: 3}
   m_PrefabInstance: {fileID: 3836937433735327634}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &303584688
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 303584689}
+  - component: {fileID: 303584690}
+  m_Layer: 0
+  m_Name: BrickPool
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &303584689
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 303584688}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 8
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &303584690
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 303584688}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b0e49de95ca4294458654186515811f6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Brick: {fileID: 3061713771866485035, guid: 0ff5b269d7776cc429f02ba04f8e1b6e, type: 3}
+  PoolSize: 15
 --- !u!1 &330585543
 GameObject:
   m_ObjectHideFlags: 0
@@ -953,7 +999,7 @@ Transform:
   - {fileID: 658234554}
   - {fileID: 1781010405}
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &1066445323 stripped
 Transform:
