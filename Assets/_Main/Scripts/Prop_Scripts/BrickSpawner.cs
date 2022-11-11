@@ -65,7 +65,6 @@ public class BrickSpawner : MonoBehaviour
             {
                 foreach (Vector3 location in _emptyLocations)
                 {
-                    //_SpawnedBrick = Instantiate(_brick, transform);
                     _SpawnedBrick = _poolManager.SpawnBrickFromPool(transform);
                     _SpawnedBrick.transform.localPosition = location;
                     _randomVar = Mathf.RoundToInt(Random.Range(-0.49f, _activeBrickTypes.Count - 0.51f));

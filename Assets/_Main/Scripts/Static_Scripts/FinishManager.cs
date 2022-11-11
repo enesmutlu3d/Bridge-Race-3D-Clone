@@ -56,6 +56,9 @@ public class FinishManager : MonoBehaviour, IInteractible
                 playerMovement.enabled = false;
             }
             
+            //Player Stack Hide
+            _playersInOrder[i].GetComponentInChildren<PlayerStackParent>().transform.gameObject.SetActive(false);
+            
             //Player Animations
             if (i == 0)
                 _playersInOrder[i].GetComponentInChildren<Animator>().SetTrigger("EndAnimationWin");

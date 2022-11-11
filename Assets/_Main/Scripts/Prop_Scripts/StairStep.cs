@@ -28,12 +28,13 @@ public class StairStep : MonoBehaviour, IInteractible
             _currentBrickType == brickType) 
             return;
         _currentBrickType = brickType;
-        _playerStack.RemoveStack();
+        _playerStack.RemoveStack(transform.position);
         StepEnable();
     }
 
     private void StepEnable()
     {
+        //Visual Enabling
         _meshRenderer.material = _currentBrickType._material;
         _meshRenderer.enabled = true;
 

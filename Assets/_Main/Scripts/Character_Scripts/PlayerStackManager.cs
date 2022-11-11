@@ -24,12 +24,11 @@ public class PlayerStackManager : MonoBehaviour
         StackPlacement(newStack);
     }
 
-    public void RemoveStack()
+    public void RemoveStack(Vector3 _dropLocation)
     {
         _stackToRemove = _stacks[_stacks.Count - 1];
         _stackToRemove.transform.SetParent(null);
         _stacks.Remove(_stacks[_stacks.Count - 1]);
-        //Destroy(_stackToRemove);
         _poolManager.DestroyBrick(_stackToRemove);
     }
 
