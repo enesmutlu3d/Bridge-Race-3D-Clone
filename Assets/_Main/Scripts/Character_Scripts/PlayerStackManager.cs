@@ -9,8 +9,14 @@ public class PlayerStackManager : MonoBehaviour
     [HideInInspector] public List<GameObject> _stacks = new List<GameObject>();
     [SerializeField] private Transform _stackParent;
     private GameObject _stackToRemove;
+    private BrickPoolManager _poolManager;
 
     private Vector3 heightIncrease = new Vector3(0f, 0.1f, 0f);
+
+    private void Start()
+    {
+        _poolManager = GameObject.FindWithTag("BrickPool").GetComponent<BrickPoolManager>();
+    }
 
     public void AddStack(GameObject newStack)
     {
@@ -23,7 +29,8 @@ public class PlayerStackManager : MonoBehaviour
         _stackToRemove = _stacks[_stacks.Count - 1];
         _stackToRemove.transform.SetParent(null);
         _stacks.Remove(_stacks[_stacks.Count - 1]);
-        Destroy(_stackToRemove);
+        //Destroy(_stackToRemove);
+        _poolManager.DestroyBrick(_stackToRemove);
     }
 
     private void StackPlacement(GameObject newStack)

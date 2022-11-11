@@ -6,8 +6,9 @@ public class BrickSpawner : MonoBehaviour
 {
     [SerializeField] public GameObject _brick;
     [SerializeField] private Vector2 GridSize;
-    public List<BrickType> _activeBrickTypes = new List<BrickType>();
+    [SerializeField] public List<BrickType> _activeBrickTypes = new List<BrickType>();
 
+    private BrickPoolManager _poolManager;
     private GameObject _SpawnedBrick;
     private WaitForSeconds _respawnDelay;
     private int _randomVar;
@@ -17,6 +18,7 @@ public class BrickSpawner : MonoBehaviour
 
     private void Start()
     {
+        _poolManager = GameObject.FindWithTag("BrickPool").GetComponent<BrickPoolManager>();
         _respawnDelay = new WaitForSeconds(2f);
         GridSet();
         StartCoroutine(nameof(RespawnCo));
@@ -63,7 +65,8 @@ public class BrickSpawner : MonoBehaviour
             {
                 foreach (Vector3 location in _emptyLocations)
                 {
-                    _SpawnedBrick = Instantiate(_brick, transform);
+                    //_SpawnedBrick = Instantiate(_brick, transform);
+                    _SpawnedBrick = _poolManager.SpawnBrickFromPool(transform);
                     _SpawnedBrick.transform.localPosition = location;
                     _randomVar = Mathf.RoundToInt(Random.Range(-0.49f, _activeBrickTypes.Count - 0.51f));
                     _SpawnedBrick.GetComponent<CollectibleBrick>().BrickInitializer(_activeBrickTypes[_randomVar]);
