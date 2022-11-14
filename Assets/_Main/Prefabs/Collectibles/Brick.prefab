@@ -47,6 +47,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _meshRenderer: {fileID: 6205050227570442911}
+  _passsiveMaterial: {fileID: 2100000, guid: 3ee7de05c3f52574484f64d3f2352558, type: 2}
   _brickSpawner: {fileID: 0}
   _brickType: {fileID: 0}
 --- !u!65 &1089744222

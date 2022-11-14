@@ -10,10 +10,9 @@ public class PlayerStackManager : MonoBehaviour
     [SerializeField] private Transform _stackParent;
     private GameObject _stackToRemove;
     private BrickPoolManager _poolManager;
+    private Vector3 _spreadLocation;
 
     private Vector3 heightIncrease = new Vector3(0f, 0.1f, 0f);
-    private Vector3 _spreadForce;
-    private Rigidbody brickRb;
 
     private void Start()
     {
@@ -41,7 +40,7 @@ public class PlayerStackManager : MonoBehaviour
             { 
                 if (isDestroyed)
                     _poolManager.DestroyBrick(_stackToRemove); 
-            });*/
+            })*/;
     }
 
     private void StackPlacement(GameObject newStack)
@@ -50,21 +49,22 @@ public class PlayerStackManager : MonoBehaviour
         newStack.GetComponent<BoxCollider>().enabled = false;
         newStack.GetComponent<CollectibleBrick>()._brickSpawner = null;
         newStack.transform.DOLocalJump(Vector3.zero + (heightIncrease * (_stacks.Count - 1)), 1.5f, 1,0.5f);
-        //newStack.transform.localPosition = Vector3.zero + (heightIncrease * (_stacks.Count - 1));
         newStack.transform.localRotation = Quaternion.identity;
     }
 
     
     // Spread Bricks
-    /*public void StackSpread()
+    public void StackSpread()
     {
-        _spreadForce = new Vector3(Random.Range(0.5f, 2f), Random.Range(0.5f, 2f), Random.Range(0.5f, 2f));
-        
         foreach (GameObject stack in _stacks)
         {
+            _spreadLocation = new Vector3(Random.Range(-2f, 2f), transform.position.y, Random.Range(-2f, 2f));
+            
+            stack.transform.DOLocalJump(transform.position + _spreadLocation, 1f, 1, 0.5f);
+            stack.GetComponent<CollectibleBrick>().SpreadedBrick();
             stack.transform.SetParent(null);
-            _stacks.Remove(stack);
         }
-    }*/
+        _stacks.Clear();
+    }
     
 }

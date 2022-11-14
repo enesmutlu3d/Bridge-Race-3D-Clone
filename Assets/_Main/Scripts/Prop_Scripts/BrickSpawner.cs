@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class BrickSpawner : MonoBehaviour
 {
-    [SerializeField] public GameObject _brick;
     [SerializeField] private Vector2 GridSize;
     [SerializeField] public List<BrickType> _activeBrickTypes = new List<BrickType>();
+    [SerializeField] private bool isFirstFloor;
 
     private BrickPoolManager _poolManager;
     private GameObject _SpawnedBrick;
@@ -26,7 +26,7 @@ public class BrickSpawner : MonoBehaviour
 
     private void GridSet()
     {
-        if (_activeBrickTypes.Count < 4)
+        if (!isFirstFloor)
             return;
         
         for (float i = -1 * (GridSize.x * 0.5f); i < (GridSize.x * 0.5f); i++)

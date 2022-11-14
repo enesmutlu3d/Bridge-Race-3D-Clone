@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class PlayerCollision : MonoBehaviour
@@ -18,11 +19,13 @@ public class PlayerCollision : MonoBehaviour
         }
     }
 
-    
-    // TO DO Spread Bricks
-    /*public void OnInteract(BrickType brickType, Transform interactor)
+    private void OnCollisionEnter(Collision other)
     {
-        if (interactor.GetComponent<PlayerStackManager>()._stacks.Count > _stackManager._stacks.Count)
-            _stackManager.StackSpread();
-    }*/
+        if (other.transform.TryGetComponent(out PlayerStackManager _playerStackManager))
+        {
+            if (_playerStackManager._stacks.Count > _stackManager._stacks.Count
+                && _stackManager._stacks.Count > 3)
+                _stackManager.StackSpread();
+        }
+    }
 }
