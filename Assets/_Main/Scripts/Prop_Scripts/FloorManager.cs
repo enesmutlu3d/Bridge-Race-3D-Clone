@@ -33,8 +33,7 @@ public class FloorManager : MonoBehaviour
         //AI
         if (other.TryGetComponent(out AiMovement aiMovement))
         {
-            aiMovement.BrickCollector(_brickSpawner);
-            aiMovement._brickSpawner = _brickSpawner;
+            aiMovement.SpawnerSet(_brickSpawner);
             _brickSpawner.SpawnPack();
         }
         

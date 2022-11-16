@@ -1,4 +1,7 @@
+using System;
 using System.Collections;
+using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 using Random = UnityEngine.Random;
@@ -6,81 +9,47 @@ using Random = UnityEngine.Random;
 public class AiMovement : MonoBehaviour
 {
     [SerializeField] private NavMeshAgent _agent;
-    [HideInInspector] public BrickSpawner _brickSpawner;
     [SerializeField] private Animator _animator;
 
     private PlayerStackManager _stackManager;
-    private PlayerCollision _playerCollision;
     private Transform _finishLine;
-    
-    private int _random;
-    private int _random2;
-    private int _checkLimiter;
-    private Vector3 _destinationPos;
-    private Transform _temp;
-    private WaitForSeconds _checkDelay;
-    private Coroutine MoveCoroutine;
+    private BrickType _brickType;
+
+    private WaitForSeconds _checkDelay = new WaitForSeconds(0.1f);
     private Coroutine AnimatorStateCoroutine;
+    private readonly Dictionary<Type, AiStateBase> _aiStates = new Dictionary<Type, AiStateBase>();
+    private AiStateBase _currentState;
+    
+    public BrickSpawner BrickSpawner { get; private set; }
+    public int StacksCount => _stackManager._stacks.Count;
     
     private void Start()
     {
         //Injections
-        _brickSpawner = GameObject.FindWithTag("FirstFloorBrickSpawner").GetComponent<BrickSpawner>();
+        BrickSpawner = GameObject.FindWithTag("FirstFloorBrickSpawner").GetComponent<BrickSpawner>();
         _finishLine = GameObject.FindWithTag("FinishLine").transform;
         _finishLine.GetComponentInParent<FinishManager>()._players.Add(transform.gameObject);
 
         //Caching
-        _checkDelay = new WaitForSeconds(0.1f);
         _stackManager = GetComponent<PlayerStackManager>();
-        _playerCollision = GetComponent<PlayerCollision>();
-        _destinationPos = transform.position;
+        
+        if (TryGetComponent(out PlayerCollision playerCollision))
+            _brickType = playerCollision._brickData;
         
         //Start Routines
-        MoveCoroutine = StartCoroutine("AiMoveCo");
         AnimatorStateCoroutine = StartCoroutine("AnimatorStateCo");
-    }
-
-    public void BrickCollector(BrickSpawner brickSpawner)
-    {
-        _brickSpawner = brickSpawner;
-        DestinationPick();
-    }
-
-    private void DestinationPick()
-    {
-        do
-        {
-            _random = Random.Range(0, _brickSpawner.transform.childCount - 1);
-            if (_brickSpawner.transform.childCount < 1)
-                return;
-            _temp = _brickSpawner.transform.GetChild(_random);
-            _checkLimiter++;
-        } while (_temp.GetComponent<CollectibleBrick>()._brickType != _playerCollision._brickData && _checkLimiter < 15);
-
-        _checkLimiter = 0;
-        _destinationPos = _temp.transform.position;
-    }
-
-    private IEnumerator AiMoveCo()
-    {
-        while (true)
-        {
-            _random2 = Random.Range(2, 21);
-
-            do
-            {
-                _agent.SetDestination(_destinationPos);
-                yield return new WaitForSeconds(Random.Range(1.25f,2.25f));
-                DestinationPick();
-            } while (_stackManager._stacks.Count < _random2);
         
-            _agent.SetDestination(_finishLine.position);
-            
-            do
-            {
-                yield return _checkDelay;
-            } while (_stackManager._stacks.Count > 0);
-        }
+        //Adding States
+        _aiStates.Add(typeof(AiLootingState), new AiLootingState(this));
+        _aiStates.Add(typeof(AiBuildingStairs), new AiBuildingStairs(this));
+        
+        ChangeState(typeof(AiLootingState));
+    }
+
+    private void Update()
+    {
+        _currentState?.OnUpdate();
+        Debug.Log(_currentState);
     }
 
     private IEnumerator AnimatorStateCo()
@@ -94,9 +63,35 @@ public class AiMovement : MonoBehaviour
 
     public void FinishState()
     {
-        StopCoroutine(MoveCoroutine);
         StopCoroutine(AnimatorStateCoroutine);
         _agent.enabled = false;
     }
+
+    public bool CheckBrickType(BrickType brickType) => _brickType == brickType;
+
+    public void SetDestination(Vector3 destinationPos) => _agent.SetDestination(destinationPos);
+
+    public void SpawnerSet(BrickSpawner brickSpawner) => BrickSpawner = brickSpawner;
+
+    public float RemaningDistance()
+    {
+        return _agent.remainingDistance;
+    }
     
+    public Transform GetFinishLine() => _finishLine;
+
+    public void ChangeState(Type type)
+    {
+        if (_currentState != null && _currentState.GetType().Equals(type))
+            return;
+
+        if (_aiStates.TryGetValue(type, out AiStateBase newState))
+        {
+            if (_currentState != null)
+                _currentState.OnExit();
+            
+            newState.OnEnter();
+            _currentState = newState;
+        }
+    }
 }
