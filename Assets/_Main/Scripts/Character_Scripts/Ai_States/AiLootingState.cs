@@ -2,8 +2,6 @@ using UnityEngine;
 
 public class AiLootingState : AiStateBase
 {
-    private const int checkLimit = 15;
-
     private int _collectAmount;
     
     public AiLootingState(AiMovement aiMovement) : base(aiMovement)
@@ -13,50 +11,39 @@ public class AiLootingState : AiStateBase
 
     private bool DestinationPick(out Vector3 destinationPos)
     {
-        Transform brickSpawnerTransform = _aiMovement.BrickSpawner.transform;
-        Transform randomChild;
-        int checkLimiter = 0;
-        
-        do
+        if (_aiMovement.BrickSpawner.TryGetBrick(_aiMovement.BrickType, out Transform brick))
         {
-            if (brickSpawnerTransform.childCount < 1)
-            {
-                destinationPos = default;
-                return false;
-            }
-            int random = Random.Range(0, brickSpawnerTransform.childCount - 1);
-            randomChild = brickSpawnerTransform.GetChild(random);
-            checkLimiter++;
-        } while (!_aiMovement.CheckBrickType(randomChild.GetComponent<CollectibleBrick>()._brickType) && checkLimiter < checkLimit);
-
-        if (checkLimiter >= checkLimit)
-        {
-            destinationPos = default;
-            return false;
+            destinationPos = brick.position;
+            return true;
         }
-        
-        destinationPos = randomChild.position;
-        return true;
+
+        destinationPos = default;
+        return false;
     }
 
     public override void OnEnter()
     {
+        Debug.Log("Looting State " + _aiMovement.gameObject.name);
+        
         _collectAmount = Random.Range(2, 10);
-        if (DestinationPick(out Vector3 destinationPos))
-            _aiMovement.SetDestination(destinationPos);
+        
+        _aiMovement.ClearDestination();
+        
+        _aiMovement.SetWalking(true);
     }
 
     public override void OnUpdate()
     {
-        int stacksCount = _aiMovement.StacksCount;
-
-        if (_aiMovement.RemaningDistance() > 0.05f)
+        if (_aiMovement.CheckPathComplete() && _aiMovement.RemaningDistance() > 0.05f)
             return;
         
+        int stacksCount = _aiMovement.StacksCount;
         if (stacksCount < _collectAmount)
         {
             if (DestinationPick(out Vector3 destinationPos))
                 _aiMovement.SetDestination(destinationPos);
+            else
+                _aiMovement.ChangeState(typeof(AiIdleState));
         }
         else
         {

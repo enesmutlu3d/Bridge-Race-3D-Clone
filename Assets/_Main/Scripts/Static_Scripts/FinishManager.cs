@@ -14,9 +14,6 @@ public class FinishManager : MonoBehaviour, IInteractible
     
     public List<GameObject> _players = new List<GameObject>();
     private List<GameObject> _playersInOrder = new List<GameObject>();
-    
-    private GameObject _temp;
-
 
     public void OnInteract(BrickType brickType, Transform interactor)
     {
@@ -29,16 +26,16 @@ public class FinishManager : MonoBehaviour, IInteractible
     {
         do
         {
-            _temp = _players[0];
+            GameObject temp = _players[0];
             foreach (var player in _players)
             {
-                if (_temp.transform.position.z < player.transform.position.z)
+                if (temp.transform.position.z < player.transform.position.z)
                 {
-                    _temp = player;
+                    temp = player;
                 }
             }
-            _playersInOrder.Add(_temp);
-            _players.Remove(_temp);
+            _playersInOrder.Add(temp);
+            _players.Remove(temp);
         } while (_players.Count != 0);
     }
 
@@ -46,29 +43,31 @@ public class FinishManager : MonoBehaviour, IInteractible
     {
         for (int i = 0; i < _playersInOrder.Count; i++)
         {
+            GameObject player = _playersInOrder[i];
+            
             //Player Movement Stop
-            if (_playersInOrder[i].TryGetComponent<AiMovement>(out AiMovement aiMovement))
+            if (player.TryGetComponent<AiMovement>(out AiMovement aiMovement))
             {
                 aiMovement.FinishState();
             }
-            if (_playersInOrder[i].TryGetComponent<PlayerMovement>(out PlayerMovement playerMovement))
+            if (player.TryGetComponent<PlayerMovement>(out PlayerMovement playerMovement))
             {
                 playerMovement.enabled = false;
             }
             
             //Player Stack Hide
-            _playersInOrder[i].GetComponentInChildren<PlayerStackParent>().transform.gameObject.SetActive(false);
+            player.GetComponentInChildren<PlayerStackParent>().transform.gameObject.SetActive(false);
             
             //Player Animations
             if (i == 0)
-                _playersInOrder[i].GetComponentInChildren<Animator>().SetTrigger("EndAnimationWin");
+                player.GetComponentInChildren<Animator>().SetTrigger("EndAnimationWin");
             else if (i > 0)
-                _playersInOrder[i].GetComponentInChildren<Animator>().SetTrigger("EndAnimationLose");
+                player.GetComponentInChildren<Animator>().SetTrigger("EndAnimationLose");
             
             //Place Players
-            _playersInOrder[i].GetComponent<Rigidbody>().isKinematic = true;
-            _playersInOrder[i].transform.position = _ladderLocations[i].transform.position;
-            _playersInOrder[i].transform.rotation = Quaternion.Euler(0,180,0);
+            player.GetComponent<Rigidbody>().isKinematic = true;
+            player.transform.position = _ladderLocations[i].transform.position;
+            player.transform.rotation = Quaternion.Euler(0,180,0);
         }
         
         _cam.Priority = 2;

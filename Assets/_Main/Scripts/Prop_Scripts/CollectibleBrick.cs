@@ -14,6 +14,8 @@ public class CollectibleBrick : MonoBehaviour, IInteractible
     private WaitForSeconds _passiveDelay;
     private bool isPassive;
 
+    public event Action<CollectibleBrick> OnCollected;
+
     private void Start()
     {
         _boxCollider = GetComponent<BoxCollider>();
@@ -30,9 +32,7 @@ public class CollectibleBrick : MonoBehaviour, IInteractible
     {
         if (brickType == _brickType || isPassive)
         {
-            _brickSpawner = GetComponentInParent<BrickSpawner>();
-            if (_brickSpawner != null)
-                _brickSpawner._emptyLocations.Add(transform.localPosition);
+            OnCollected?.Invoke(this);
             BrickInitializer(brickType);
             interactor.GetComponent<PlayerStackManager>().AddStack(transform.gameObject);
             isPassive = false;

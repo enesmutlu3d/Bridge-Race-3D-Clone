@@ -29,7 +29,7 @@ public class PlayerStackManager : MonoBehaviour
     {
         _stackToRemove = _stacks[_stacks.Count - 1];
         _stackToRemove.transform.SetParent(null);
-        _stacks.Remove(_stacks[_stacks.Count - 1]);
+        _stacks.Remove(_stackToRemove);
         
         if (isDestroyed)
             _poolManager.DestroyBrick(_stackToRemove); 

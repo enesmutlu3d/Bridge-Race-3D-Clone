@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[DefaultExecutionOrder(-1)]
 public class FloorManager : MonoBehaviour
 {
     private BrickSpawner _brickSpawner;
@@ -38,7 +39,7 @@ public class FloorManager : MonoBehaviour
         }
         
         //Player
-        if (other.TryGetComponent(out PlayerMovement playerMovement))
+        else if (other.TryGetComponent(out PlayerMovement playerMovement))
             _brickSpawner.SpawnPack();
     }
 }

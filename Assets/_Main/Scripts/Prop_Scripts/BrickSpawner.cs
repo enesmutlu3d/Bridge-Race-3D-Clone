@@ -4,24 +4,24 @@ using UnityEngine;
 
 public class BrickSpawner : MonoBehaviour
 {
+    private const int checkLimit = 100;
+    private const float _respawnDelay = 2f;
+
     [SerializeField] private Vector2 GridSize;
     [SerializeField] public List<BrickType> _activeBrickTypes = new List<BrickType>();
     [SerializeField] private bool isFirstFloor;
 
     private BrickPoolManager _poolManager;
-    private GameObject _SpawnedBrick;
-    private WaitForSeconds _respawnDelay;
-    private int _randomVar;
+    private readonly  Dictionary<BrickType, List<CollectibleBrick>> _bricks = new Dictionary<BrickType, List<CollectibleBrick>>();
 
-    private List<Vector3> _respawnLocations = new List<Vector3>();
-    [HideInInspector] public List<Vector3> _emptyLocations = new List<Vector3>();
+    private readonly List<Vector3> _respawnLocations = new List<Vector3>();
+    private readonly List<Vector3> _emptyLocations = new List<Vector3>();
 
     private void Start()
     {
         _poolManager = GameObject.FindWithTag("BrickPool").GetComponent<BrickPoolManager>();
-        _respawnDelay = new WaitForSeconds(2f);
         GridSet();
-        StartCoroutine(nameof(RespawnCo));
+        SpawnInitialBricks();
     }
 
     private void GridSet()
@@ -56,25 +56,63 @@ public class BrickSpawner : MonoBehaviour
         }
     }
 
-    private IEnumerator RespawnCo ()
+    private void SpawnBrickOnLocation(Vector3 location)
     {
-        yield return new WaitForEndOfFrame();
-        while (true)
+        GameObject spawnedBrick = _poolManager.SpawnBrickFromPool(transform);
+        CollectibleBrick collectibleBrick = spawnedBrick.GetComponent<CollectibleBrick>();
+        collectibleBrick.OnCollected += BrickCollected;
+        spawnedBrick.transform.localPosition = location;
+        spawnedBrick.transform.rotation = Quaternion.identity;
+        spawnedBrick.SetActive(true);
+        int randomVar = Random.Range(0, _activeBrickTypes.Count);
+        BrickType brickType = _activeBrickTypes[randomVar];
+        spawnedBrick.GetComponent<CollectibleBrick>().BrickInitializer(brickType);
+                    
+        if (_bricks.TryGetValue(brickType, out List<CollectibleBrick> brickTypeList))
+            brickTypeList.Add(collectibleBrick);
+        else
         {
-            if (_emptyLocations != null)
-            {
-                foreach (Vector3 location in _emptyLocations)
-                {
-                    _SpawnedBrick = _poolManager.SpawnBrickFromPool(transform);
-                    _SpawnedBrick.transform.localPosition = location;
-                    _SpawnedBrick.transform.rotation = Quaternion.identity;
-                    _SpawnedBrick.SetActive(true);
-                    _randomVar = Mathf.RoundToInt(Random.Range(-0.49f, _activeBrickTypes.Count - 0.51f));
-                    _SpawnedBrick.GetComponent<CollectibleBrick>().BrickInitializer(_activeBrickTypes[_randomVar]);
-                }
-                _emptyLocations.Clear();
-            }
-            yield return _respawnDelay;
+            brickTypeList = new List<CollectibleBrick>();
+            brickTypeList.Add(collectibleBrick);
+            _bricks.Add(brickType, brickTypeList);
         }
+    }
+
+    private void SpawnInitialBricks ()
+    {
+        foreach (Vector3 location in _emptyLocations)
+        {
+            SpawnBrickOnLocation(location);
+        }
+        _emptyLocations.Clear();
+    }
+
+    private void ReinitEmptyBrick()
+    {
+        if (_emptyLocations.Count < 1)
+            return;
+        
+        Vector3 location = _emptyLocations[0];
+        SpawnBrickOnLocation(location);
+    }
+
+    private void BrickCollected(CollectibleBrick collectibleBrick)
+    {
+        collectibleBrick.OnCollected -= BrickCollected;
+        _emptyLocations.Add((collectibleBrick.transform.position));
+        Invoke(nameof(ReinitEmptyBrick), _respawnDelay);
+    }
+
+    public bool TryGetBrick(BrickType brickType, out Transform brick)
+    {
+        if (_bricks.TryGetValue(brickType, out List<CollectibleBrick> brickTypeList) &&
+            brickTypeList.Count > 0)
+        {
+            brick = brickTypeList[Random.Range(0, brickTypeList.Count - 1)].transform;
+            return true;
+        }
+
+        brick = default;
+        return false;
     }
 }

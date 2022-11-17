@@ -8,19 +8,20 @@ using Random = UnityEngine.Random;
 
 public class AiMovement : MonoBehaviour
 {
+    private readonly int walkingHash = Animator.StringToHash("isWalking");
+    
     [SerializeField] private NavMeshAgent _agent;
     [SerializeField] private Animator _animator;
+    [SerializeField] private bool _showLog;
 
     private PlayerStackManager _stackManager;
     private Transform _finishLine;
-    private BrickType _brickType;
 
-    private WaitForSeconds _checkDelay = new WaitForSeconds(0.1f);
-    private Coroutine AnimatorStateCoroutine;
     private readonly Dictionary<Type, AiStateBase> _aiStates = new Dictionary<Type, AiStateBase>();
     private AiStateBase _currentState;
     
     public BrickSpawner BrickSpawner { get; private set; }
+    public BrickType BrickType { get; private set; }
     public int StacksCount => _stackManager._stacks.Count;
     
     private void Start()
@@ -34,49 +35,42 @@ public class AiMovement : MonoBehaviour
         _stackManager = GetComponent<PlayerStackManager>();
         
         if (TryGetComponent(out PlayerCollision playerCollision))
-            _brickType = playerCollision._brickData;
-        
-        //Start Routines
-        AnimatorStateCoroutine = StartCoroutine("AnimatorStateCo");
+            BrickType = playerCollision._brickData;
         
         //Adding States
+        _aiStates.Add(typeof(AiIdleState), new AiIdleState(this));
         _aiStates.Add(typeof(AiLootingState), new AiLootingState(this));
         _aiStates.Add(typeof(AiBuildingStairs), new AiBuildingStairs(this));
         
-        ChangeState(typeof(AiLootingState));
+        ChangeState(typeof(AiIdleState));
     }
 
     private void Update()
     {
         _currentState?.OnUpdate();
-        Debug.Log(_currentState);
+        if (_showLog)
+            Debug.Log(_currentState + " - " + gameObject.name);
     }
 
-    private IEnumerator AnimatorStateCo()
+    public void SetWalking(bool state)
     {
-        while (true)
-        {
-            _animator.SetBool("isWalking", !(_agent.remainingDistance < 0.5f));
-            yield return _checkDelay;
-        }
+        _animator.SetBool(walkingHash, state);
     }
+
+    public void ClearDestination() => _agent.ResetPath();
 
     public void FinishState()
     {
-        StopCoroutine(AnimatorStateCoroutine);
         _agent.enabled = false;
     }
-
-    public bool CheckBrickType(BrickType brickType) => _brickType == brickType;
 
     public void SetDestination(Vector3 destinationPos) => _agent.SetDestination(destinationPos);
 
     public void SpawnerSet(BrickSpawner brickSpawner) => BrickSpawner = brickSpawner;
 
-    public float RemaningDistance()
-    {
-        return _agent.remainingDistance;
-    }
+    public float RemaningDistance() => _agent.remainingDistance;
+
+    public bool CheckPathComplete() => _agent.pathStatus == NavMeshPathStatus.PathComplete;
     
     public Transform GetFinishLine() => _finishLine;
 
@@ -90,8 +84,8 @@ public class AiMovement : MonoBehaviour
             if (_currentState != null)
                 _currentState.OnExit();
             
-            newState.OnEnter();
             _currentState = newState;
+            newState.OnEnter();
         }
     }
 }

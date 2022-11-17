@@ -11,7 +11,11 @@ public class AiBuildingStairs : AiStateBase
 
     public override void OnEnter()
     {
+        Debug.Log("BuildingStairs State " + _aiMovement.gameObject.name);
+        
         _aiMovement.SetDestination(_aiMovement.GetFinishLine().position);
+        
+        _aiMovement.SetWalking(true);
     }
 
     public override void OnUpdate()
