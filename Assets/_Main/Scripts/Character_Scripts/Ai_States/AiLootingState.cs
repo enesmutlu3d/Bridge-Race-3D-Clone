@@ -4,14 +4,14 @@ public class AiLootingState : AiStateBase
 {
     private int _collectAmount;
     
-    public AiLootingState(AiMovement aiMovement) : base(aiMovement)
+    public AiLootingState(AiStateMachine aiStateMachine) : base(aiStateMachine)
     {
         
     }
 
     private bool DestinationPick(out Vector3 destinationPos)
     {
-        if (_aiMovement.BrickSpawner.TryGetBrick(_aiMovement.BrickType, out Transform brick))
+        if (AiStateMachine.BrickSpawner.TryGetBrick(AiStateMachine.BrickType, out Transform brick))
         {
             destinationPos = brick.position;
             return true;
@@ -23,31 +23,29 @@ public class AiLootingState : AiStateBase
 
     public override void OnEnter()
     {
-        Debug.Log("Looting State " + _aiMovement.gameObject.name);
-        
         _collectAmount = Random.Range(2, 10);
         
-        _aiMovement.ClearDestination();
+        AiStateMachine.ClearDestination();
         
-        _aiMovement.SetWalking(true);
+        AiStateMachine.SetWalking(true);
     }
 
     public override void OnUpdate()
     {
-        if (_aiMovement.CheckPathComplete() && _aiMovement.RemaningDistance() > 0.05f)
+        if (AiStateMachine.CheckPathComplete() && AiStateMachine.RemaningDistance() > 0.05f)
             return;
         
-        int stacksCount = _aiMovement.StacksCount;
+        int stacksCount = AiStateMachine.StacksCount;
         if (stacksCount < _collectAmount)
         {
             if (DestinationPick(out Vector3 destinationPos))
-                _aiMovement.SetDestination(destinationPos);
+                AiStateMachine.SetDestination(destinationPos);
             else
-                _aiMovement.ChangeState(typeof(AiIdleState));
+                AiStateMachine.ChangeState(typeof(AiIdleState));
         }
         else
         {
-            _aiMovement.ChangeState(typeof(AiBuildingStairs));
+            AiStateMachine.ChangeState(typeof(AiBuildingStairState));
         }
     }
 }

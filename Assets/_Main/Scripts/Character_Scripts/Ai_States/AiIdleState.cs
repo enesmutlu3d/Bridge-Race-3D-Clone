@@ -4,20 +4,19 @@ using UnityEngine;
 
 public class AiIdleState : AiStateBase
 {
-    public AiIdleState(AiMovement aiMovement) : base(aiMovement)
+    public AiIdleState(AiStateMachine aiStateMachine) : base(aiStateMachine)
     {
         
     }
 
     public override void OnEnter()
     {
-        Debug.Log("Idle State " + _aiMovement.gameObject.name);
-        _aiMovement.ChangeState(typeof(AiLootingState));
+        AiStateMachine.ChangeState(typeof(AiLootingState));
         return;
         
-        _aiMovement.ClearDestination();
+        AiStateMachine.ClearDestination();
         
-        _aiMovement.SetWalking(false);
+        AiStateMachine.SetWalking(false);
         
         
     }

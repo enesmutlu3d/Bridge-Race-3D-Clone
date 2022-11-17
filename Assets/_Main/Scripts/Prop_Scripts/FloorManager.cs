@@ -32,7 +32,7 @@ public class FloorManager : MonoBehaviour
         _brickSpawner.enabled = true;
         
         //AI
-        if (other.TryGetComponent(out AiMovement aiMovement))
+        if (other.TryGetComponent(out AiStateMachine aiMovement))
         {
             aiMovement.SpawnerSet(_brickSpawner);
             _brickSpawner.SpawnPack();

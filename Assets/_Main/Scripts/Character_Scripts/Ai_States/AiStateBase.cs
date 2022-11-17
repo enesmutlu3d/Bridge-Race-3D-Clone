@@ -5,11 +5,11 @@ using UnityEngine.AI;
 
 public abstract class AiStateBase
 {
-    protected readonly AiMovement _aiMovement;
+    protected readonly AiStateMachine AiStateMachine;
     
-    public AiStateBase(AiMovement aiMovement)
+    public AiStateBase(AiStateMachine aiStateMachine)
     {
-        _aiMovement = aiMovement;
+        AiStateMachine = aiStateMachine;
     }
     
     public virtual void OnEnter() {}

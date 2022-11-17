@@ -8,17 +8,21 @@ public class BrickPoolManager : MonoBehaviour
     [SerializeField] public GameObject Brick;
     [SerializeField] private int PoolSize;
 
-    private GameObject _temp;
     private List<GameObject> _bricks = new List<GameObject>();
 
 
     private void Start()
     {
-        for (int i = 0; i < PoolSize; i++)
+        FillPool(PoolSize);
+    }
+
+    private void FillPool(int amount)
+    {
+        for (int i = 0; i < amount; i++)
         {
-            _temp = Instantiate(Brick, transform);
-            _bricks.Add(_temp);
-            _temp.SetActive(false);
+            GameObject temp = Instantiate(Brick, transform);
+            _bricks.Add(temp);
+            temp.SetActive(false);
         }
     }
     
@@ -26,14 +30,12 @@ public class BrickPoolManager : MonoBehaviour
     {
         if (_bricks.Count == 0)
         {
-            _temp = Instantiate(Brick, transform);
-            _bricks.Add(_temp);
-            _temp.SetActive(false);
+            FillPool(1);
         }
-        _temp = _bricks[0];
-        _bricks.Remove(_bricks[0]);
-        _temp.transform.SetParent(transform);
-        return _temp;
+        GameObject brick = _bricks[0];
+        _bricks.Remove(brick);
+        brick.transform.SetParent(transform);
+        return brick;
     }
 
     public void DestroyBrick(GameObject _brickToDestroy)

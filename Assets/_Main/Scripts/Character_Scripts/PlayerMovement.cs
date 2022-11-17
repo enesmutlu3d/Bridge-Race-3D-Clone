@@ -5,6 +5,10 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
+    private readonly int walkingHash = Animator.StringToHash("isWalking");
+    private readonly int winnerHash = Animator.StringToHash("EndAnimationWin");
+    private readonly int loserHash = Animator.StringToHash("EndAnimationLose");
+    
     [SerializeField] private Rigidbody _rigidbody;
     [SerializeField] private float movementSpeed;
     [SerializeField] private Animator _animator;
@@ -13,6 +17,7 @@ public class PlayerMovement : MonoBehaviour
     private Vector2 targetDirection;
     private Vector3 targetAngle;
     private float playerSpeed;
+    private bool finishTrigger = false;
 
     private void Start()
     {
@@ -23,6 +28,8 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update()
     {
+        if (finishTrigger) 
+            return;
         InputChecker();
         RotatePlayer();
         MovePlayer();
@@ -35,13 +42,13 @@ public class PlayerMovement : MonoBehaviour
 
         if (targetDirection.magnitude < 0.1f)
         {
-            _animator.SetBool("isWalking", false);
+            _animator.SetBool(walkingHash, false);
             return;
         }
         else
         {
-            _animator.SetBool("isWalking", true);
-            _animator.SetFloat("RunSpeedMultiplier", Mathf.Lerp(0,1,targetDirection.magnitude));
+            _animator.SetBool(walkingHash, true);
+            //_animator.SetFloat("RunSpeedMultiplier", Mathf.Lerp(0,1,targetDirection.magnitude));
         }
     }
 
@@ -59,4 +66,13 @@ public class PlayerMovement : MonoBehaviour
         _rigidbody.velocity = transform.forward * playerSpeed;
     }
 
+    public void PlayerFinishState(int order)
+    {
+        if (order == 0)
+            _animator.SetTrigger(winnerHash);
+        else
+            _animator.SetTrigger(loserHash);
+
+        finishTrigger = true;
+    }
 }

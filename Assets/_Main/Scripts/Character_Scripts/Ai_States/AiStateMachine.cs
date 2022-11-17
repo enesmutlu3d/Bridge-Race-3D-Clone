@@ -6,13 +6,14 @@ using UnityEngine;
 using UnityEngine.AI;
 using Random = UnityEngine.Random;
 
-public class AiMovement : MonoBehaviour
+public class AiStateMachine : MonoBehaviour
 {
     private readonly int walkingHash = Animator.StringToHash("isWalking");
+    private readonly int winnerHash = Animator.StringToHash("EndAnimationWin");
+    private readonly int loserHash = Animator.StringToHash("EndAnimationLose");
     
     [SerializeField] private NavMeshAgent _agent;
     [SerializeField] private Animator _animator;
-    [SerializeField] private bool _showLog;
 
     private PlayerStackManager _stackManager;
     private Transform _finishLine;
@@ -38,9 +39,12 @@ public class AiMovement : MonoBehaviour
             BrickType = playerCollision._brickData;
         
         //Adding States
+        _aiStates.Add(typeof(AiWinnerState), new AiWinnerState(this));
+        _aiStates.Add(typeof(AiLoserState), new AiLoserState(this));
+        _aiStates.Add(typeof(AiHitState), new AiHitState(this));
         _aiStates.Add(typeof(AiIdleState), new AiIdleState(this));
         _aiStates.Add(typeof(AiLootingState), new AiLootingState(this));
-        _aiStates.Add(typeof(AiBuildingStairs), new AiBuildingStairs(this));
+        _aiStates.Add(typeof(AiBuildingStairState), new AiBuildingStairState(this));
         
         ChangeState(typeof(AiIdleState));
     }
@@ -48,21 +52,17 @@ public class AiMovement : MonoBehaviour
     private void Update()
     {
         _currentState?.OnUpdate();
-        if (_showLog)
-            Debug.Log(_currentState + " - " + gameObject.name);
     }
 
-    public void SetWalking(bool state)
-    {
-        _animator.SetBool(walkingHash, state);
-    }
+    public void SetWalking(bool state) => _animator.SetBool(walkingHash, state);
+
+    public void SetWinner() => _animator.SetTrigger(winnerHash);
+    
+    public void SetLoser() => _animator.SetTrigger(loserHash);
 
     public void ClearDestination() => _agent.ResetPath();
 
-    public void FinishState()
-    {
-        _agent.enabled = false;
-    }
+    public void SetAgent(bool state) => _agent.enabled = state;
 
     public void SetDestination(Vector3 destinationPos) => _agent.SetDestination(destinationPos);
 

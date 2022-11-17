@@ -45,24 +45,23 @@ public class FinishManager : MonoBehaviour, IInteractible
         {
             GameObject player = _playersInOrder[i];
             
-            //Player Movement Stop
-            if (player.TryGetComponent<AiMovement>(out AiMovement aiMovement))
+            //Ai State
+            if (player.TryGetComponent<AiStateMachine>(out AiStateMachine aiStateMachine))
             {
-                aiMovement.FinishState();
+                if (i == 0)
+                    aiStateMachine.ChangeState(typeof(AiWinnerState));
+                else
+                    aiStateMachine.ChangeState(typeof(AiLoserState));
             }
+            
+            //Player State
             if (player.TryGetComponent<PlayerMovement>(out PlayerMovement playerMovement))
             {
-                playerMovement.enabled = false;
+                playerMovement.PlayerFinishState(i);
             }
             
             //Player Stack Hide
             player.GetComponentInChildren<PlayerStackParent>().transform.gameObject.SetActive(false);
-            
-            //Player Animations
-            if (i == 0)
-                player.GetComponentInChildren<Animator>().SetTrigger("EndAnimationWin");
-            else if (i > 0)
-                player.GetComponentInChildren<Animator>().SetTrigger("EndAnimationLose");
             
             //Place Players
             player.GetComponent<Rigidbody>().isKinematic = true;

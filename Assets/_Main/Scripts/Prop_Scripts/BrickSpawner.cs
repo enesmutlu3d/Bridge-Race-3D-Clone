@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class BrickSpawner : MonoBehaviour
 {
-    private const int checkLimit = 100;
     private const float _respawnDelay = 2f;
 
     [SerializeField] private Vector2 GridSize;
@@ -99,7 +98,7 @@ public class BrickSpawner : MonoBehaviour
     private void BrickCollected(CollectibleBrick collectibleBrick)
     {
         collectibleBrick.OnCollected -= BrickCollected;
-        _emptyLocations.Add((collectibleBrick.transform.position));
+        _emptyLocations.Add(collectibleBrick.transform.position);
         Invoke(nameof(ReinitEmptyBrick), _respawnDelay);
     }
 
