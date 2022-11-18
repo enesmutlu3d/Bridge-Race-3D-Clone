@@ -25,22 +25,14 @@ public class PlayerStackManager : MonoBehaviour
         StackPlacement(newStack);
     }
 
-    public void RemoveStack(Vector3 _dropLocation, bool isDestroyed)
+    public void RemoveStack(bool isDestroyed)
     {
         _stackToRemove = _stacks[_stacks.Count - 1];
         _stackToRemove.transform.SetParent(null);
         _stacks.Remove(_stackToRemove);
         
         if (isDestroyed)
-            _poolManager.DestroyBrick(_stackToRemove); 
-        
-        //Animated Stair Brick Placing
-        /*_stackToRemove.transform.DOJump(_dropLocation, 2,1,0.5f).
-            OnComplete(()=> 
-            { 
-                if (isDestroyed)
-                    _poolManager.DestroyBrick(_stackToRemove); 
-            })*/;
+            _poolManager.DestroyBrick(_stackToRemove);
     }
 
     private void StackPlacement(GameObject newStack)

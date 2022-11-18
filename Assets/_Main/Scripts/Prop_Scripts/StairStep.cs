@@ -28,7 +28,7 @@ public class StairStep : MonoBehaviour, IInteractible
             _currentBrickType == brickType) 
             return;
         _currentBrickType = brickType;
-        _playerStack.RemoveStack(transform.position, true);
+        _playerStack.RemoveStack(true);
         StepEnable();
     }
 

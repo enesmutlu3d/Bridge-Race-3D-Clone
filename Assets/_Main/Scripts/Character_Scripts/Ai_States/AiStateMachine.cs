@@ -78,8 +78,6 @@ public class AiStateMachine : MonoBehaviour
     public bool CheckPathComplete() => _agent.pathStatus == NavMeshPathStatus.PathComplete;
     
     public Transform GetFinishLine() => _finishLine;
-
-    public Animator GetAnimator() => _animator;
     
     public void TriggerHit() => OnHit?.Invoke();
 

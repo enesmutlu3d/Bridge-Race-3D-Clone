@@ -53,5 +53,6 @@ public class CollectibleBrick : MonoBehaviour, IInteractible
         _boxCollider.enabled = true;
         isPassive = true;
         yield return null;
+        yield break;
     }
 }

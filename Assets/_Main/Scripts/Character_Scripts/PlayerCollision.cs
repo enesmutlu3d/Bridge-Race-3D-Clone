@@ -30,9 +30,6 @@ public class PlayerCollision : MonoBehaviour
             //Ai Set State
             if (transform.TryGetComponent(out AiStateMachine aiStateMachine))
                 aiStateMachine.ChangeState(typeof(AiHitState));
-            
-            //Player Set State
-            //else if ()
         }
     }
 }
