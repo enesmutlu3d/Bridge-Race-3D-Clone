@@ -21,11 +21,18 @@ public class PlayerCollision : MonoBehaviour
 
     private void OnCollisionEnter(Collision other)
     {
-        if (other.transform.TryGetComponent(out PlayerStackManager _playerStackManager))
+        if (other.transform.TryGetComponent(out PlayerStackManager playerStackManager) &&
+            playerStackManager._stacks.Count > _stackManager._stacks.Count &&
+             _stackManager._stacks.Count > 1)
         {
-            if (_playerStackManager._stacks.Count > _stackManager._stacks.Count
-                && _stackManager._stacks.Count > 3)
-                _stackManager.StackSpread();
+            _stackManager.StackSpread();
+                
+            //Ai Set State
+            if (transform.TryGetComponent(out AiStateMachine aiStateMachine))
+                aiStateMachine.ChangeState(typeof(AiHitState));
+            
+            //Player Set State
+            //else if ()
         }
     }
 }

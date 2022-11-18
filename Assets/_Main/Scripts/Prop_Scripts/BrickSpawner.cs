@@ -92,13 +92,14 @@ public class BrickSpawner : MonoBehaviour
             return;
         
         Vector3 location = _emptyLocations[0];
+        _emptyLocations.Remove(location);
         SpawnBrickOnLocation(location);
     }
 
     private void BrickCollected(CollectibleBrick collectibleBrick)
     {
         collectibleBrick.OnCollected -= BrickCollected;
-        _emptyLocations.Add(collectibleBrick.transform.position);
+        _emptyLocations.Add(collectibleBrick.transform.localPosition);
         Invoke(nameof(ReinitEmptyBrick), _respawnDelay);
     }
 

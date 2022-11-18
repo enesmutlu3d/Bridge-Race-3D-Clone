@@ -58,13 +58,14 @@ public class FinishManager : MonoBehaviour, IInteractible
             if (player.TryGetComponent<PlayerMovement>(out PlayerMovement playerMovement))
             {
                 playerMovement.PlayerFinishState(i);
+                player.GetComponent<Rigidbody>().isKinematic = true;
             }
             
             //Player Stack Hide
             player.GetComponentInChildren<PlayerStackParent>().transform.gameObject.SetActive(false);
             
             //Place Players
-            player.GetComponent<Rigidbody>().isKinematic = true;
+            //player.GetComponent<Rigidbody>().isKinematic = true;
             player.transform.position = _ladderLocations[i].transform.position;
             player.transform.rotation = Quaternion.Euler(0,180,0);
         }

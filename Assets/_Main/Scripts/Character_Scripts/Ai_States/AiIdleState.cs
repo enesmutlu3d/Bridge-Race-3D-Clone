@@ -11,18 +11,13 @@ public class AiIdleState : AiStateBase
 
     public override void OnEnter()
     {
-        AiStateMachine.ChangeState(typeof(AiLootingState));
-        return;
-        
         AiStateMachine.ClearDestination();
         
         AiStateMachine.SetWalking(false);
-        
-        
     }
 
     public override void OnUpdate()
     {
-        
+        AiStateMachine.ChangeState(typeof(AiLootingState));
     }
 }

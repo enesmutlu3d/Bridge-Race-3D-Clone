@@ -11,6 +11,7 @@ public class AiStateMachine : MonoBehaviour
     private readonly int walkingHash = Animator.StringToHash("isWalking");
     private readonly int winnerHash = Animator.StringToHash("EndAnimationWin");
     private readonly int loserHash = Animator.StringToHash("EndAnimationLose");
+    private readonly int hitHash = Animator.StringToHash("HitAnimation");
     
     [SerializeField] private NavMeshAgent _agent;
     [SerializeField] private Animator _animator;
@@ -24,6 +25,8 @@ public class AiStateMachine : MonoBehaviour
     public BrickSpawner BrickSpawner { get; private set; }
     public BrickType BrickType { get; private set; }
     public int StacksCount => _stackManager._stacks.Count;
+
+    public event Action OnHit;
     
     private void Start()
     {
@@ -60,19 +63,25 @@ public class AiStateMachine : MonoBehaviour
     
     public void SetLoser() => _animator.SetTrigger(loserHash);
 
+    public void SetHit() => _animator.SetTrigger(hitHash);
+
     public void ClearDestination() => _agent.ResetPath();
 
     public void SetAgent(bool state) => _agent.enabled = state;
 
     public void SetDestination(Vector3 destinationPos) => _agent.SetDestination(destinationPos);
 
-    public void SpawnerSet(BrickSpawner brickSpawner) => BrickSpawner = brickSpawner;
+    public void SetSpawner(BrickSpawner brickSpawner) => BrickSpawner = brickSpawner;
 
     public float RemaningDistance() => _agent.remainingDistance;
 
     public bool CheckPathComplete() => _agent.pathStatus == NavMeshPathStatus.PathComplete;
     
     public Transform GetFinishLine() => _finishLine;
+
+    public Animator GetAnimator() => _animator;
+    
+    public void TriggerHit() => OnHit?.Invoke();
 
     public void ChangeState(Type type)
     {

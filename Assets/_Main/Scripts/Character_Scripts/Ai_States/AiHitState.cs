@@ -11,11 +11,16 @@ public class AiHitState : AiStateBase
 
     public override void OnEnter()
     {
-        
+        AiStateMachine.ClearDestination();
+        AiStateMachine.SetWalking(false);
+        AiStateMachine.SetHit();
+        AiStateMachine.OnHit += Hit;
     }
 
-    public override void OnUpdate()
+    public override void OnExit()
     {
-        
+        AiStateMachine.OnHit -= Hit;
     }
+
+    private void Hit() => AiStateMachine.ChangeState(typeof(AiLootingState));
 }
