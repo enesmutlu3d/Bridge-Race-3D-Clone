@@ -50,7 +50,7 @@ public class PlayerStackManager : MonoBehaviour
     {
         foreach (GameObject stack in _stacks)
         {
-            _spreadLocation = new Vector3(Random.Range(-2f, 2f), transform.position.y, Random.Range(-2f, 2f));
+            _spreadLocation = new Vector3(Random.Range(-2f, 2f), 0, Random.Range(-2f, 2f));
             
             stack.transform.DOLocalJump(transform.position + _spreadLocation, 1f, 1, 0.5f);
             stack.GetComponent<CollectibleBrick>().SpreadedBrick();
